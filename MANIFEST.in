@@ -1,0 +1,6 @@
+recursive-include OwO/client/speech/recognizer/model *
+include requirements.txt
+include OwO/configuration/*.conf
+recursive-include OwO/res *
+recursive-include OwO/res/snd *
+recursive-include OwO/res/text/* *
