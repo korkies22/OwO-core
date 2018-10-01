@@ -21,7 +21,7 @@ from time import time, sleep
 import os.path
 from os.path import exists, join, expanduser
 
-from OwO import OwO_ROOT_PATH
+from owo import OwO_ROOT_PATH
 from owo.api import DeviceApi
 from owo.configuration import Configuration
 from owo.tts import TTS, TTSValidator
