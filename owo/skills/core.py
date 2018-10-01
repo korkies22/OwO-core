@@ -28,7 +28,7 @@ from adapt.intent import Intent, IntentBuilder
 from os.path import join, abspath, dirname, basename, exists
 from threading import Event, Timer
 
-from OwO import dialog
+from owo import dialog
 from owo.api import DeviceApi
 from owo.audio import wait_while_speaking
 from owo.enclosure.api import EnclosureAPI
