@@ -18,7 +18,7 @@ import time
 import os
 import os.path
 
-import OwO
+import owo
 from owo.util.log import LOG
 
 
