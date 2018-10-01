@@ -15,21 +15,21 @@
 # limitations under the License.
 #
 from difflib import SequenceMatcher
-from OwO.util.time import now_local
+from owo.util.time import now_local
 
-from OwO.util.lang.parse_en import *
-from OwO.util.lang.parse_pt import *
-from OwO.util.lang.parse_es import *
-from OwO.util.lang.parse_it import *
-from OwO.util.lang.parse_sv import *
-from OwO.util.lang.parse_de import extractnumber_de
-from OwO.util.lang.parse_de import extract_datetime_de
-from OwO.util.lang.parse_de import normalize_de
-from OwO.util.lang.parse_fr import extractnumber_fr
-from OwO.util.lang.parse_fr import extract_datetime_fr
-from OwO.util.lang.parse_fr import normalize_fr
+from owo.util.lang.parse_en import *
+from owo.util.lang.parse_pt import *
+from owo.util.lang.parse_es import *
+from owo.util.lang.parse_it import *
+from owo.util.lang.parse_sv import *
+from owo.util.lang.parse_de import extractnumber_de
+from owo.util.lang.parse_de import extract_datetime_de
+from owo.util.lang.parse_de import normalize_de
+from owo.util.lang.parse_fr import extractnumber_fr
+from owo.util.lang.parse_fr import extract_datetime_fr
+from owo.util.lang.parse_fr import normalize_fr
 
-from OwO.util.lang.parse_common import *
+from owo.util.lang.parse_common import *
 
 
 def fuzzy_match(x, against):

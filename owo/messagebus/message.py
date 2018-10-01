@@ -13,14 +13,14 @@
 # limitations under the License.
 #
 import json
-from OwO.util.parse import normalize
+from owo.util.parse import normalize
 
 
 class Message(object):
     """Holds and manipulates data sent over the websocket
 
         Message objects will be used to send information back and forth
-        between processes of OwO.
+        between processes of owo.
 
     Attributes:
         type (str): type of data sent within the message.

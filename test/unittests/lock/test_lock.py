@@ -20,7 +20,7 @@ import mock
 import os
 from os.path import exists, isfile
 
-from OwO.lock import Lock
+from owo.lock import Lock
 
 
 class TestLock(unittest.TestCase):

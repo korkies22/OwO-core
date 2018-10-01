@@ -59,14 +59,14 @@ function help() {
 _module=""
 function name-to-script-path() {
     case ${1} in
-        "bus")               _module="OwO.messagebus.service" ;;
-        "skills")            _module="OwO.skills" ;;
-        "audio")             _module="OwO.audio" ;;
-        "voice")             _module="OwO.client.speech" ;;
-        "cli")               _module="OwO.client.text" ;;
-        "audiotest")         _module="OwO.util.audio_test" ;;
-        "audioaccuracytest") _module="OwO.audio-accuracy-test" ;;
-        "enclosure")         _module="OwO.client.enclosure" ;;
+        "bus")               _module="owo.messagebus.service" ;;
+        "skills")            _module="owo.skills" ;;
+        "audio")             _module="owo.audio" ;;
+        "voice")             _module="owo.client.speech" ;;
+        "cli")               _module="owo.client.text" ;;
+        "audiotest")         _module="owo.util.audio_test" ;;
+        "audioaccuracytest") _module="owo.audio-accuracy-test" ;;
+        "enclosure")         _module="owo.client.enclosure" ;;
 
         *)
             echo "Error: Unknown name '${1}'"
@@ -109,7 +109,7 @@ function launch-background() {
     name-to-script-path ${1}
     if pgrep -f "python3 -m ${_module}" > /dev/null ; then
         echo "Restarting: ${1}"
-        "${DIR}/stop-OwO.sh" ${1}
+        "${DIR}/stop-owo.sh" ${1}
     else
         echo "Starting background service $1"
     fi
@@ -133,8 +133,8 @@ function launch-all() {
     launch-background voice
 
     # Determine platform type
-    if [[ -r /etc/OwO/OwO.conf ]] ; then
-        OwO_platform=$( jq -r ".enclosure.platform" < /etc/OwO/OwO.conf )
+    if [[ -r /etc/OwO/owo.conf ]] ; then
+        OwO_platform=$( jq -r ".enclosure.platform" < /etc/OwO/owo.conf )
         if [[ $OwO_platform = "OwO_mark_1" ]] ; then
             # running on a Mark 1, start enclosure service
             launch-background enclosure

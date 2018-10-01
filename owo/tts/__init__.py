@@ -24,15 +24,15 @@ from time import time, sleep
 import os.path
 from os.path import dirname, exists, isdir, join
 
-import OwO.util
-from OwO.enclosure.api import EnclosureAPI
-from OwO.configuration import Configuration
-from OwO.messagebus.message import Message
-from OwO.metrics import report_timing, Stopwatch
-from OwO.util import (
+import owo.util
+from owo.enclosure.api import EnclosureAPI
+from owo.configuration import Configuration
+from owo.messagebus.message import Message
+from owo.metrics import report_timing, Stopwatch
+from owo.util import (
     play_wav, play_mp3, check_for_signal, create_signal, resolve_resource_file
 )
-from OwO.util.log import LOG
+from owo.util.log import LOG
 from queue import Queue, Empty
 
 
@@ -222,8 +222,8 @@ class TTS(object):
 
         self.bus.emit(Message("recognizer_loop:audio_output_end"))
         # Clean the cache as needed
-        cache_dir = OwO.util.get_cache_directory("tts")
-        OwO.util.curate_cache(cache_dir, min_free_percent=100)
+        cache_dir = owo.util.get_cache_directory("tts")
+        owo.util.curate_cache(cache_dir, min_free_percent=100)
 
         # This check will clear the "signal"
         check_for_signal("isSpeaking")
@@ -309,7 +309,7 @@ class TTS(object):
                                                 self.spellings[word.lower()])
 
         key = str(hashlib.md5(sentence.encode('utf-8', 'ignore')).hexdigest())
-        wav_file = os.path.join(OwO.util.get_cache_directory("tts"),
+        wav_file = os.path.join(owo.util.get_cache_directory("tts"),
                                 key + '.' + self.audio_ext)
 
         if os.path.exists(wav_file):
@@ -335,10 +335,10 @@ class TTS(object):
 
     def clear_cache(self):
         """ Remove all cached files. """
-        if not os.path.exists(OwO.util.get_cache_directory('tts')):
+        if not os.path.exists(owo.util.get_cache_directory('tts')):
             return
-        for f in os.listdir(OwO.util.get_cache_directory("tts")):
-            file_path = os.path.join(OwO.util.get_cache_directory("tts"),
+        for f in os.listdir(owo.util.get_cache_directory("tts")):
+            file_path = os.path.join(owo.util.get_cache_directory("tts"),
                                      f)
             if os.path.isfile(file_path):
                 os.unlink(file_path)
@@ -352,7 +352,7 @@ class TTS(object):
                 phonemes:   phoneme string to save
         """
 
-        cache_dir = OwO.util.get_cache_directory("tts")
+        cache_dir = owo.util.get_cache_directory("tts")
         pho_file = os.path.join(cache_dir, key + ".pho")
         try:
             with open(pho_file, "w") as cachefile:
@@ -368,7 +368,7 @@ class TTS(object):
             Args:
                 Key:    Key identifying phoneme cache
         """
-        pho_file = os.path.join(OwO.util.get_cache_directory("tts"),
+        pho_file = os.path.join(owo.util.get_cache_directory("tts"),
                                 key + ".pho")
         if os.path.exists(pho_file):
             try:
@@ -434,16 +434,16 @@ class TTSValidator(object):
 
 
 class TTSFactory(object):
-    from OwO.tts.espeak_tts import ESpeak
-    from OwO.tts.fa_tts import FATTS
-    from OwO.tts.google_tts import GoogleTTS
-    from OwO.tts.mary_tts import MaryTTS
-    from OwO.tts.mimic_tts import Mimic
-    from OwO.tts.spdsay_tts import SpdSay
-    from OwO.tts.bing_tts import BingTTS
-    from OwO.tts.ibm_tts import WatsonTTS
-    from OwO.tts.responsive_voice_tts import ResponsiveVoice
-    from OwO.tts.mimic2_tts import Mimic2
+    from owo.tts.espeak_tts import ESpeak
+    from owo.tts.fa_tts import FATTS
+    from owo.tts.google_tts import GoogleTTS
+    from owo.tts.mary_tts import MaryTTS
+    from owo.tts.mimic_tts import Mimic
+    from owo.tts.spdsay_tts import SpdSay
+    from owo.tts.bing_tts import BingTTS
+    from owo.tts.ibm_tts import WatsonTTS
+    from owo.tts.responsive_voice_tts import ResponsiveVoice
+    from owo.tts.mimic2_tts import Mimic2
 
     CLASSES = {
         "mimic": Mimic,
@@ -463,7 +463,7 @@ class TTSFactory(object):
         """
         Factory method to create a TTS engine based on configuration.
 
-        The configuration file ``OwO.conf`` contains a ``tts`` section with
+        The configuration file ``owo.conf`` contains a ``tts`` section with
         the name of a TTS module to be read by this method.
 
         "tts": {

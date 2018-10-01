@@ -15,7 +15,7 @@
 import time
 from os.path import abspath
 
-from OwO.messagebus.message import Message
+from owo.messagebus.message import Message
 
 
 def ensure_uri(s):
@@ -52,7 +52,7 @@ class AudioService(object):
 
     def __init__(self, bus):
         self.bus = bus
-        self.bus.on('OwO.audio.service.track_info_reply',
+        self.bus.on('owo.audio.service.track_info_reply',
                     self._track_info)
         self.info = None
 
@@ -74,7 +74,7 @@ class AudioService(object):
         elif not isinstance(tracks, list):
             raise ValueError
         tracks = [ensure_uri(t) for t in tracks]
-        self.bus.emit(Message('OwO.audio.service.queue',
+        self.bus.emit(Message('owo.audio.service.queue',
                               data={'tracks': tracks}))
 
     def play(self, tracks=None, utterance=''):
@@ -93,29 +93,29 @@ class AudioService(object):
         elif not isinstance(tracks, list):
             raise ValueError
         tracks = [ensure_uri(t) for t in tracks]
-        self.bus.emit(Message('OwO.audio.service.play',
+        self.bus.emit(Message('owo.audio.service.play',
                               data={'tracks': tracks,
                                     'utterance': utterance}))
 
     def stop(self):
         """ Stop the track. """
-        self.bus.emit(Message('OwO.audio.service.stop'))
+        self.bus.emit(Message('owo.audio.service.stop'))
 
     def next(self):
         """ Change to next track. """
-        self.bus.emit(Message('OwO.audio.service.next'))
+        self.bus.emit(Message('owo.audio.service.next'))
 
     def prev(self):
         """ Change to previous track. """
-        self.bus.emit(Message('OwO.audio.service.prev'))
+        self.bus.emit(Message('owo.audio.service.prev'))
 
     def pause(self):
         """ Pause playback. """
-        self.bus.emit(Message('OwO.audio.service.pause'))
+        self.bus.emit(Message('owo.audio.service.pause'))
 
     def resume(self):
         """ Resume paused playback. """
-        self.bus.emit(Message('OwO.audio.service.resume'))
+        self.bus.emit(Message('owo.audio.service.resume'))
 
     def track_info(self):
         """ Request information of current playing track.
@@ -124,7 +124,7 @@ class AudioService(object):
                 Dict with track info.
         """
         self.info = None
-        self.bus.emit(Message('OwO.audio.service.track_info'))
+        self.bus.emit(Message('owo.audio.service.track_info'))
         wait = 5.0
         while self.info is None and wait >= 0:
             time.sleep(0.1)

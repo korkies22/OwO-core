@@ -17,12 +17,12 @@
 import unittest
 from datetime import datetime
 
-from OwO.util.parse import extract_datetime
-from OwO.util.parse import extract_number
-from OwO.util.parse import fuzzy_match
-from OwO.util.parse import get_gender
-from OwO.util.parse import match_one
-from OwO.util.parse import normalize
+from owo.util.parse import extract_datetime
+from owo.util.parse import extract_number
+from owo.util.parse import fuzzy_match
+from owo.util.parse import get_gender
+from owo.util.parse import match_one
+from owo.util.parse import normalize
 
 
 class TestFuzzyMatch(unittest.TestCase):

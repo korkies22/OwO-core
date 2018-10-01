@@ -18,12 +18,13 @@ import json
 import requests
 from requests import HTTPError, RequestException
 
-from OwO.configuration import Configuration
-from OwO.configuration.config import DEFAULT_CONFIG, SYSTEM_CONFIG, \
+from owo.configuration import Configuration
+from owo.configuration.config import DEFAULT_CONFIG, SYSTEM_CONFIG, \
     USER_CONFIG
-from OwO.identity import IdentityManager
-from OwO.version import VersionManager
-from OwO.util import get_arch, connected, LOG
+from owo.identity import IdentityManager
+from owo.version import VersionManager
+from owo.util import get_arch, connected, LOG
+
 
 _paired_cache = False
 

@@ -16,9 +16,9 @@ import abc
 import re
 from requests_futures.sessions import FuturesSession
 
-from OwO.tts import TTS
-from OwO.util import remove_last_slash, play_wav
-from OwO.util.log import LOG
+from owo.tts import TTS
+from owo.util import remove_last_slash, play_wav
+from owo.util.log import LOG
 
 
 class RemoteTTS(TTS):

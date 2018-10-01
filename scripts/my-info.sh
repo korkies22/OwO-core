@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Verify and present the user with information about their installation of OwO.
+# Verify and present the user with information about their installation of owo.
 # Should be run as the OwO user.
 #
 # To do: functionalize and allow for parametereized calls of each.
@@ -167,10 +167,10 @@ function checkPIP() {
 # a series of tubes
 function checktubes() {
     mlog "Internet connectivity..."
-    case "$( curl -s --max-time 2 -I http://home.OwO.ai/ | sed 's/^[^ ]*  *\([0-9]\).*/\1/; 1q' )" in
-        [23]) mlog " - HTTP connectivity to https://home.OwO.ai worked!";;
-        5) mlog " = Error: The web proxy won't let us through to https://home.OwO.ai";;
-        *) mlog " = Error: The network is down or very slow getting to https://home.OwO.ai";;
+    case "$( curl -s --max-time 2 -I http://home.owo.ai/ | sed 's/^[^ ]*  *\([0-9]\).*/\1/; 1q' )" in
+        [23]) mlog " - HTTP connectivity to https://home.owo.ai worked!";;
+        5) mlog " = Error: The web proxy won't let us through to https://home.owo.ai";;
+        *) mlog " = Error: The network is down or very slow getting to https://home.owo.ai";;
     esac
 }
 

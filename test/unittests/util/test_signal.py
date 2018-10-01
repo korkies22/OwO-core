@@ -17,7 +17,7 @@ from shutil import rmtree
 
 from os.path import exists, isfile
 
-from OwO.util import create_signal, check_for_signal
+from owo.util import create_signal, check_for_signal
 
 
 class TestSignals(unittest.TestCase):

@@ -18,11 +18,11 @@ import time
 
 import requests
 
-from OwO.api import DeviceApi, is_paired
-from OwO.configuration import Configuration
-from OwO.session import SessionManager
-from OwO.util.log import LOG
-from OwO.version import CORE_VERSION_STR
+from owo.api import DeviceApi, is_paired
+from owo.configuration import Configuration
+from owo.session import SessionManager
+from owo.util.log import LOG
+from owo.version import CORE_VERSION_STR
 from copy import copy
 
 

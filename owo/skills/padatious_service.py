@@ -19,10 +19,10 @@ from time import time as get_time, sleep
 from os.path import expanduser, isfile
 from pkg_resources import get_distribution
 
-from OwO.configuration import Configuration
-from OwO.messagebus.message import Message
-from OwO.skills.core import FallbackSkill
-from OwO.util.log import LOG
+from owo.configuration import Configuration
+from owo.messagebus.message import Message
+from owo.skills.core import FallbackSkill
+from owo.util.log import LOG
 
 
 class PadatiousService(FallbackSkill):
@@ -54,7 +54,7 @@ class PadatiousService(FallbackSkill):
         self.bus.on('padatious:register_intent', self.register_intent)
         self.bus.on('padatious:register_entity', self.register_entity)
         self.bus.on('detach_intent', self.handle_detach_intent)
-        self.bus.on('OwO.skills.initialized', self.train)
+        self.bus.on('owo.skills.initialized', self.train)
         self.register_fallback(self.handle_fallback, 5)
         self.finished_training_event = Event()
         self.finished_initial_train = False

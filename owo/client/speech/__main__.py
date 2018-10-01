@@ -15,16 +15,16 @@
 from threading import Lock
 
 from OwO import dialog
-from OwO.enclosure.api import EnclosureAPI
-from OwO.client.speech.listener import RecognizerLoop
-from OwO.configuration import Configuration
-from OwO.identity import IdentityManager
-from OwO.lock import Lock as PIDLock  # Create/Support PID locking file
-from OwO.messagebus.client.ws import WebsocketClient
-from OwO.messagebus.message import Message
-from OwO.util import create_daemon, wait_for_exit_signal, \
+from owo.enclosure.api import EnclosureAPI
+from owo.client.speech.listener import RecognizerLoop
+from owo.configuration import Configuration
+from owo.identity import IdentityManager
+from owo.lock import Lock as PIDLock  # Create/Support PID locking file
+from owo.messagebus.client.ws import WebsocketClient
+from owo.messagebus.message import Message
+from owo.util import create_daemon, wait_for_exit_signal, \
     reset_sigint_handler
-from OwO.util.log import LOG
+from owo.util.log import LOG
 
 bus = None  # OwO messagebus connection
 lock = Lock()
@@ -47,9 +47,9 @@ def handle_no_internet():
 
 
 def handle_awoken():
-    """ Forward OwO.awoken to the messagebus. """
+    """ Forward owo.awoken to the messagebus. """
     LOG.info("Listener is now Awake: ")
-    bus.emit(Message('OwO.awoken'))
+    bus.emit(Message('owo.awoken'))
 
 
 def handle_wakeword(event):
@@ -67,7 +67,7 @@ def handle_utterance(event):
 
 
 def handle_unknown():
-    bus.emit(Message('OwO.speech.recognition.unknown'))
+    bus.emit(Message('owo.speech.recognition.unknown'))
 
 
 def handle_speak(event):
@@ -128,7 +128,7 @@ def handle_audio_end(event):
 
 def handle_stop(event):
     """
-        Handler for OwO.stop, i.e. button press
+        Handler for owo.stop, i.e. button press
     """
     loop.force_unmute()
 
@@ -144,7 +144,7 @@ def main():
     global loop
     reset_sigint_handler()
     PIDLock("voice")
-    bus = WebsocketClient()  # OwO messagebus, see OwO.messagebus
+    bus = WebsocketClient()  # OwO messagebus, see owo.messagebus
     Configuration.init(bus)
 
     # Register handlers on internal RecognizerLoop bus
@@ -163,13 +163,13 @@ def main():
     bus.on('complete_intent_failure', handle_complete_intent_failure)
     bus.on('recognizer_loop:sleep', handle_sleep)
     bus.on('recognizer_loop:wake_up', handle_wake_up)
-    bus.on('OwO.mic.mute', handle_mic_mute)
-    bus.on('OwO.mic.unmute', handle_mic_unmute)
-    bus.on('OwO.mic.get_status', handle_mic_get_status)
-    bus.on("OwO.paired", handle_paired)
+    bus.on('owo.mic.mute', handle_mic_mute)
+    bus.on('owo.mic.unmute', handle_mic_unmute)
+    bus.on('owo.mic.get_status', handle_mic_get_status)
+    bus.on("owo.paired", handle_paired)
     bus.on('recognizer_loop:audio_output_start', handle_audio_start)
     bus.on('recognizer_loop:audio_output_end', handle_audio_end)
-    bus.on('OwO.stop', handle_stop)
+    bus.on('owo.stop', handle_stop)
 
     create_daemon(bus.run_forever)
     create_daemon(loop.run)

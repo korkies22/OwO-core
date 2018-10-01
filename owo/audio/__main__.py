@@ -17,13 +17,13 @@
 
     This handles playback of audio and speech
 """
-from OwO.configuration import Configuration
-from OwO.messagebus.client.ws import WebsocketClient
-from OwO.util import reset_sigint_handler, wait_for_exit_signal, \
+from owo.configuration import Configuration
+from owo.messagebus.client.ws import WebsocketClient
+from owo.util import reset_sigint_handler, wait_for_exit_signal, \
     create_daemon, create_echo_function, check_for_signal
-from OwO.util.log import LOG
+from owo.util.log import LOG
 
-import OwO.audio.speech as speech
+import owo.audio.speech as speech
 from .audioservice import AudioService
 
 
@@ -36,7 +36,7 @@ def main():
     speech.init(bus)
 
     LOG.info("Starting Audio Services")
-    bus.on('message', create_echo_function('AUDIO', ['OwO.audio.service']))
+    bus.on('message', create_echo_function('AUDIO', ['owo.audio.service']))
     audio = AudioService(bus)  # Connect audio service instance to message bus
     create_daemon(bus.run_forever)
 

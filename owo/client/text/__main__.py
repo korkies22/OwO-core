@@ -16,7 +16,7 @@ import sys
 import io
 import os.path
 import curses
-from OwO.util import get_ipc_directory
+from owo.util import get_ipc_directory
 from .text_client import (
         load_settings, save_settings, simple_cli, gui_main,
         start_log_monitor, start_mic_monitor
@@ -40,7 +40,7 @@ def main():
     # Monitor system logs
     start_log_monitor("/var/log/OwO/skills.log")
     start_log_monitor("/var/log/OwO/voice.log")
-    # logs when using Debian package   TODO: Unify all
+    # logs when using Debian package   TODO: unifica todo
     start_log_monitor("/var/log/OwO-skills.log")
     start_log_monitor("/var/log/OwO-speech-client.log")
 

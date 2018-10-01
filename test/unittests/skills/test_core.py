@@ -22,11 +22,11 @@ from os.path import join, dirname, abspath
 from re import error
 from datetime import datetime
 
-from OwO.configuration import Configuration
-from OwO.messagebus.message import Message
-from OwO.skills.skill_data import load_regex_from_file, load_regex, \
+from owo.configuration import Configuration
+from owo.messagebus.message import Message
+from owo.skills.skill_data import load_regex_from_file, load_regex, \
     load_vocab_from_file, load_vocabulary
-from OwO.skills.core import OwOSkill, load_skill, \
+from owo.skills.core import OwOSkill, load_skill, \
     create_skill_descriptor, open_intent_envelope
 
 from test.util import base_config

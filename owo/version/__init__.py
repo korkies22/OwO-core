@@ -17,8 +17,8 @@ import json
 from genericpath import exists, isfile
 from os.path import join, expanduser
 
-from OwO.configuration import Configuration
-from OwO.util.log import LOG
+from owo.configuration import Configuration
+from owo.util.log import LOG
 
 
 # The following lines are replaced during the release process.

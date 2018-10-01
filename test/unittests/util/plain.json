@@ -40,7 +40,7 @@
     "stop_threshold": 2.0
   },
   "server": {
-    "url": "https://api.OwO.ai",
+    "url": "https://api.owo.ai",
     "version": "v1",
     "update": true,
     "metrics": false

@@ -18,9 +18,9 @@ from abc import ABCMeta, abstractmethod
 from requests import post, put, exceptions
 from speech_recognition import Recognizer
 
-from OwO.api import STTApi
-from OwO.configuration import Configuration
-from OwO.util.log import LOG
+from owo.api import STTApi
+from owo.configuration import Configuration
+from owo.util.log import LOG
 
 
 class STT(object):

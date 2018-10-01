@@ -50,7 +50,7 @@
 
 
     Usage Example:
-        from OwO.skill.settings import SkillSettings
+        from owo.skill.settings import SkillSettings
 
         s = SkillSettings('./settings.json', 'ImportantSettings')
         s['meaning of life'] = 42
@@ -63,9 +63,9 @@ import hashlib
 from threading import Timer
 from os.path import isfile, join, expanduser
 
-from OwO.api import DeviceApi, is_paired
-from OwO.util.log import LOG
-from OwO.configuration import ConfigurationManager
+from owo.api import DeviceApi, is_paired
+from owo.util.log import LOG
+from owo.configuration import ConfigurationManager
 
 
 class SkillSettings(dict):

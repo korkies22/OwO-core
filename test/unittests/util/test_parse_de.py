@@ -17,9 +17,9 @@
 import unittest
 from datetime import datetime
 
-from OwO.util.parse import extract_datetime
-from OwO.util.parse import extract_number
-from OwO.util.parse import normalize
+from owo.util.parse import extract_datetime
+from owo.util.parse import extract_number
+from owo.util.parse import normalize
 
 
 class TestNormalize(unittest.TestCase):

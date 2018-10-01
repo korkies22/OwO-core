@@ -25,7 +25,7 @@
 
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
-from OwO.util.lang.parse_common import is_numeric, look_for_fractions
+from owo.util.lang.parse_common import is_numeric, look_for_fractions
 
 # Undefined articles ["un", "une"] cannot be supressed,
 # in French, "un cheval" means "a horse" or "one horse".

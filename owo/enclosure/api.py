@@ -13,7 +13,7 @@
 # limitations under the License.
 #
 from .display_manager import DisplayManager
-from OwO.messagebus.message import Message
+from owo.messagebus.message import Message
 
 
 '''
@@ -26,7 +26,7 @@ will be changed in the future.
 class EnclosureAPI:
     """
     This API is intended to be used to interface with the hardware
-    that is running OwO.  It exposes all possible commands which
+    that is running owo.  It exposes all possible commands which
     can be sent to a OwO enclosure implementation.
 
     Different enclosure implementations may implement this differently

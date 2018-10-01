@@ -18,8 +18,8 @@ import mock
 import os
 from speech_recognition import WavFile
 
-from OwO.client.speech.listener import RecognizerLoop
-from OwO.configuration import Configuration
+from owo.client.speech.listener import RecognizerLoop
+from owo.configuration import Configuration
 from test.util import base_config
 
 DATA_DIR = os.path.join(os.path.abspath(os.path.dirname(__file__)), "data")
@@ -27,22 +27,22 @@ DATA_DIR = os.path.join(os.path.abspath(os.path.dirname(__file__)), "data")
 
 class LocalRecognizerTest(unittest.TestCase):
     def setUp(self):
-        with mock.patch('OwO.configuration.Configuration.get') as \
+        with mock.patch('owo.configuration.Configuration.get') as \
                 mock_config_get:
             mock_config_get.return_value = base_config()
             rl = RecognizerLoop()
             self.recognizer = RecognizerLoop.create_wake_word_recognizer(rl)
 
     def testRecognizerWrapper(self):
-        source = WavFile(os.path.join(DATA_DIR, "hey_OwO.wav"))
+        source = WavFile(os.path.join(DATA_DIR, "hey_owo.wav"))
         with source as audio:
             assert self.recognizer.found_wake_word(audio.stream.read())
-        source = WavFile(os.path.join(DATA_DIR, "OwO.wav"))
+        source = WavFile(os.path.join(DATA_DIR, "owo.wav"))
         with source as audio:
             assert self.recognizer.found_wake_word(audio.stream.read())
 
     def testRecognitionInLongerUtterance(self):
-        source = WavFile(os.path.join(DATA_DIR, "weather_OwO.wav"))
+        source = WavFile(os.path.join(DATA_DIR, "weather_owo.wav"))
         with source as audio:
             assert self.recognizer.found_wake_word(audio.stream.read())
 

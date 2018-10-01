@@ -29,15 +29,15 @@ import requests
 
 import signal as sig
 
-import OwO.audio
-import OwO.configuration
-from OwO.util.format import nice_number
+import owo.audio
+import owo.configuration
+from owo.util.format import nice_number
 # Officially exported methods from this file:
 # play_wav, play_mp3, play_ogg, get_cache_directory,
 # resolve_resource_file, wait_while_speaking
-from OwO.util.log import LOG
-from OwO.util.parse import extract_datetime, extract_number, normalize
-from OwO.util.signal import *
+from owo.util.log import LOG
+from owo.util.parse import extract_datetime, extract_number, normalize
+from owo.util.signal import *
 
 
 def resolve_resource_file(res_name):
@@ -62,7 +62,7 @@ def resolve_resource_file(res_name):
     Args:
         res_name (str): a resource path/name
     """
-    config = OwO.configuration.Configuration.get()
+    config = owo.configuration.Configuration.get()
 
     # First look for fully qualified file (e.g. a user setting)
     if os.path.isfile(res_name):
@@ -89,7 +89,7 @@ def resolve_resource_file(res_name):
 
 
 def play_wav(uri):
-    config = OwO.configuration.Configuration.get()
+    config = owo.configuration.Configuration.get()
     play_cmd = config.get("play_wav_cmdline")
     play_wav_cmd = str(play_cmd).split(" ")
     for index, cmd in enumerate(play_wav_cmd):
@@ -99,7 +99,7 @@ def play_wav(uri):
 
 
 def play_mp3(uri):
-    config = OwO.configuration.Configuration.get()
+    config = owo.configuration.Configuration.get()
     play_cmd = config.get("play_mp3_cmdline")
     play_mp3_cmd = str(play_cmd).split(" ")
     for index, cmd in enumerate(play_mp3_cmd):
@@ -109,7 +109,7 @@ def play_mp3(uri):
 
 
 def play_ogg(uri):
-    config = OwO.configuration.Configuration.get()
+    config = owo.configuration.Configuration.get()
     play_cmd = config.get("play_ogg_cmdline")
     play_ogg_cmd = str(play_cmd).split(" ")
     for index, cmd in enumerate(play_ogg_cmd):
@@ -266,7 +266,7 @@ def get_cache_directory(domain=None):
     Return:
         str: a path to the directory where you can cache data
     """
-    config = OwO.configuration.Configuration.get()
+    config = owo.configuration.Configuration.get()
     dir = config.get("cache_path")
     if not dir:
         # If not defined, use /tmp/OwO/cache
@@ -276,7 +276,7 @@ def get_cache_directory(domain=None):
 
 def validate_param(value, name):
     if not value:
-        raise ValueError("Missing or empty %s in OwO.conf " % name)
+        raise ValueError("Missing or empty %s in owo.conf " % name)
 
 
 def is_speaking():
@@ -285,9 +285,9 @@ def is_speaking():
     Returns:
         bool: True while still speaking
     """
-    LOG.info("OwO.utils.is_speaking() is depreciated, use "
-             "OwO.audio.is_speaking() instead.")
-    return OwO.audio.is_speaking()
+    LOG.info("owo.utils.is_speaking() is depreciated, use "
+             "owo.audio.is_speaking() instead.")
+    return owo.audio.is_speaking()
 
 
 def wait_while_speaking():
@@ -297,17 +297,17 @@ def wait_while_speaking():
     briefly to ensure that any preceeding request to speak has time to
     begin.
     """
-    LOG.info("OwO.utils.wait_while_speaking() is depreciated, use "
-             "OwO.audio.wait_while_speaking() instead.")
-    return OwO.audio.wait_while_speaking()
+    LOG.info("owo.utils.wait_while_speaking() is depreciated, use "
+             "owo.audio.wait_while_speaking() instead.")
+    return owo.audio.wait_while_speaking()
 
 
 def stop_speaking():
     # TODO: Less hacky approach to this once Audio Manager is implemented
     # Skills should only be able to stop speech they've initiated
-    LOG.info("OwO.utils.stop_speaking() is depreciated, use "
-             "OwO.audio.stop_speaking() instead.")
-    OwO.audio.stop_speaking()
+    LOG.info("owo.utils.stop_speaking() is depreciated, use "
+             "owo.audio.stop_speaking() instead.")
+    owo.audio.stop_speaking()
 
 
 def get_arch():
@@ -318,7 +318,7 @@ def get_arch():
 def reset_sigint_handler():
     """
     Reset the sigint handler to the default. This fixes KeyboardInterrupt
-    not getting raised when started via start-OwO.sh
+    not getting raised when started via start-owo.sh
     """
     sig.signal(sig.SIGINT, sig.default_int_handler)
 
@@ -341,7 +341,7 @@ def wait_for_exit_signal():
 
 
 def create_echo_function(name, whitelist=None):
-    from OwO.configuration import Configuration
+    from owo.configuration import Configuration
     blacklist = Configuration.get().get("ignore_logs")
 
     def echo(message):

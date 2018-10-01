@@ -14,7 +14,7 @@
 #
 from gtts import gTTS
 
-from OwO.tts import TTS, TTSValidator
+from owo.tts import TTS, TTSValidator
 
 
 class GoogleTTS(TTS):

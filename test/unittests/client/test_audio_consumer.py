@@ -18,8 +18,8 @@ import speech_recognition
 from os.path import dirname, join
 from speech_recognition import WavFile, AudioData
 
-from OwO.client.speech.listener import AudioConsumer, RecognizerLoop
-from OwO.stt import OwOSTT
+from owo.client.speech.listener import AudioConsumer, RecognizerLoop
+from owo.stt import OwOSTT
 from queue import Queue
 
 

@@ -15,7 +15,7 @@
 import json
 import time
 
-from OwO.filesystem import FileSystemAccess
+from owo.filesystem import FileSystemAccess
 
 
 class DeviceIdentity(object):

@@ -53,7 +53,7 @@ setup(
     version=get_version(),
     license='Apache-2.0',
     author='OwO A.I.',
-    author_email='devs@OwO.ai',
+    author_email='devs@owo.ai',
     url='https://github.com/OwOAI/OwO-core',
     description='OwO Core',
     install_requires=required('requirements.txt'),
@@ -62,14 +62,14 @@ setup(
 
     entry_points={
         'console_scripts': [
-            'OwO-speech-client=OwO.client.speech.__main__:main',
-            'OwO-messagebus=OwO.messagebus.service.__main__:main',
-            'OwO-skills=OwO.skills.__main__:main',
-            'OwO-audio=OwO.audio.__main__:main',
-            'OwO-echo-observer=OwO.messagebus.client.ws:echo',
-            'OwO-audio-test=OwO.util.audio_test:main',
-            'OwO-enclosure-client=OwO.client.enclosure.__main__:main',
-            'OwO-cli-client=OwO.client.text.__main__:main'
+            'OwO-speech-client=owo.client.speech.__main__:main',
+            'OwO-messagebus=owo.messagebus.service.__main__:main',
+            'OwO-skills=owo.skills.__main__:main',
+            'OwO-audio=owo.audio.__main__:main',
+            'OwO-echo-observer=owo.messagebus.client.ws:echo',
+            'OwO-audio-test=owo.util.audio_test:main',
+            'OwO-enclosure-client=owo.client.enclosure.__main__:main',
+            'OwO-cli-client=owo.client.text.__main__:main'
         ]
     }
 )

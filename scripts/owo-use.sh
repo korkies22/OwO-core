@@ -22,17 +22,17 @@ change_to=${1}
 #path to OwO-core checkout
 path=${2:-"${HOME}/OwO-core"}
 #currently installed package
-current_pkg=$( cat /etc/apt/sources.list.d/repo.OwO.ai.list )
-stable_pkg="deb http://repo.OwO.ai/repos/apt/debian debian main"
-unstable_pkg="deb http://repo.OwO.ai/repos/apt/debian debian-unstable main"
+current_pkg=$( cat /etc/apt/sources.list.d/repo.owo.ai.list )
+stable_pkg="deb http://repo.owo.ai/repos/apt/debian debian main"
+unstable_pkg="deb http://repo.owo.ai/repos/apt/debian debian-unstable main"
 
 mark_1_package_list="OwO-mark-1 OwO-core OwO-wifi-setup"
 picroft_package_list="OwO-picroft OwO-core OwO-wifi-setup"
 
 # Determine the platform
 OwO_platform="null"
-if [[ -r /etc/OwO/OwO.conf ]] ; then
-    OwO_platform=$( jq -r '.enclosure.platform' /etc/OwO/OwO.conf )
+if [[ -r /etc/OwO/owo.conf ]] ; then
+    OwO_platform=$( jq -r '.enclosure.platform' /etc/OwO/owo.conf )
 else
     if [[ "$( hostname )" == "picroft" ]] ; then
         OwO_platform="picroft"
@@ -115,23 +115,23 @@ function github_init_scripts() {
 
         # switch to point a github install and run as the current user
         # TODO Verify all of these
-        sudo sed -i 's_.*SCRIPT=.*_SCRIPT="'${path}'/start-OwO.sh audio"_g' /etc/init.d/OwO-audio
+        sudo sed -i 's_.*SCRIPT=.*_SCRIPT="'${path}'/start-owo.sh audio"_g' /etc/init.d/OwO-audio
         sudo sed -i 's_.*RUNAS=.*_RUNAS='${user}'_g' /etc/init.d/OwO-audio
         sudo sed -i 's_stop() {_stop() {\nPID=$(ps ax | grep OwO/audio/ | awk '"'NR==1{print \$1; exit}'"')\necho "${PID}" > "$PIDFILE"_g' /etc/init.d/OwO-audio
 
-        sudo sed -i 's_.*SCRIPT=.*_SCRIPT="'${path}'/start-OwO.sh enclosure"_g' /etc/init.d/OwO-enclosure-client
+        sudo sed -i 's_.*SCRIPT=.*_SCRIPT="'${path}'/start-owo.sh enclosure"_g' /etc/init.d/OwO-enclosure-client
         sudo sed -i 's_.*RUNAS=.*_RUNAS='${user}'_g' /etc/init.d/OwO-enclosure-client
         sudo sed -i 's_stop() {_stop() {\nPID=$(ps ax | grep OwO/client/enclosure/ | awk '"'NR==1{print \$1; exit}'"')\necho "${PID}" > "$PIDFILE"_g' /etc/init.d/OwO-enclosure-client
 
-        sudo sed -i 's_.*SCRIPT=.*_SCRIPT="'${path}'/start-OwO.sh bus"_g' /etc/init.d/OwO-messagebus
+        sudo sed -i 's_.*SCRIPT=.*_SCRIPT="'${path}'/start-owo.sh bus"_g' /etc/init.d/OwO-messagebus
         sudo sed -i 's_.*RUNAS=.*_RUNAS='${user}'_g' /etc/init.d/OwO-messagebus
         sudo sed -i 's_stop() {_stop() {\nPID=$(ps ax | grep OwO/messagebus/ | awk '"'NR==1{print \$1; exit}'"')\necho "${PID}" > "$PIDFILE"_g' /etc/init.d/OwO-messagebus
 
-        sudo sed -i 's_.*SCRIPT=.*_SCRIPT="'${path}'/start-OwO.sh skills"_g' /etc/init.d/OwO-skills
+        sudo sed -i 's_.*SCRIPT=.*_SCRIPT="'${path}'/start-owo.sh skills"_g' /etc/init.d/OwO-skills
         sudo sed -i 's_.*RUNAS=.*_RUNAS='${user}'_g' /etc/init.d/OwO-skills
         sudo sed -i 's_stop() {_stop() {\nPID=$(ps ax | grep OwO/skills/ | awk '"'NR==1{print \$1; exit}'"')\necho "${PID}" > "$PIDFILE"_g' /etc/init.d/OwO-skills
 
-        sudo sed -i 's_.*SCRIPT=.*_SCRIPT="'${path}'/start-OwO.sh voice"_g' /etc/init.d/OwO-speech-client
+        sudo sed -i 's_.*SCRIPT=.*_SCRIPT="'${path}'/start-owo.sh voice"_g' /etc/init.d/OwO-speech-client
         sudo sed -i 's_.*RUNAS=.*_RUNAS='${user}'_g' /etc/init.d/OwO-speech-client
         sudo sed -i 's_stop() {_stop() {\nPID=$(ps ax | grep OwO/client/speech | awk '"'NR==1{print \$1; exit}'"')\necho "${PID}" > "$PIDFILE"_g' /etc/init.d/OwO-speech-client
 
@@ -186,7 +186,7 @@ function remove_all() {
 
 function change_build() {
     build=${1}
-    sudo sh -c 'echo '"${build}"' > /etc/apt/sources.list.d/repo.OwO.ai.list'
+    sudo sh -c 'echo '"${build}"' > /etc/apt/sources.list.d/repo.owo.ai.list'
     sudo apt-get update
 
     invoke_apt install
@@ -196,25 +196,25 @@ function stable_to_unstable_server() {
     identity_path=/home/OwO/.OwO/identity/
     conf_path=/home/OwO/.OwO/
 
-    # check if on stable (home-test.OwO.ai) already
-    cmp --silent ${conf_path}/OwO.conf ${conf_path}/OwO.conf.unstable
+    # check if on stable (home-test.owo.ai) already
+    cmp --silent ${conf_path}/owo.conf ${conf_path}/owo.conf.unstable
     if [ $? -eq 0 ] ; then
-       echo "Already set to use the home-test.OwO.ai server"
+       echo "Already set to use the home-test.owo.ai server"
        return
     fi
 
     # point to test server
-    echo "Changing OwO.conf to point to test server api-test.OwO.ai"
-    if [ -f ${conf_path}OwO.conf ] ; then
-        cp ${conf_path}OwO.conf ${conf_path}OwO.conf.stable
+    echo "Changing owo.conf to point to test server api-test.owo.ai"
+    if [ -f ${conf_path}owo.conf ] ; then
+        cp ${conf_path}owo.conf ${conf_path}owo.conf.stable
     else
-        echo "could not find OwO.conf, was it deleted?"
+        echo "could not find owo.conf, was it deleted?"
     fi
-    if [ -f ${conf_path}OwO.conf.unstable ] ; then
-        cp ${conf_path}OwO.conf.unstable ${conf_path}OwO.conf
+    if [ -f ${conf_path}owo.conf.unstable ] ; then
+        cp ${conf_path}owo.conf.unstable ${conf_path}owo.conf
     else
-        rm -r ${conf_path}OwO.conf
-        echo '{"server": {"url":"https://api-test.OwO.ai", "version":"v1", "update":true, "metrics":false }}' $( cat ${conf_path}OwO.conf.stable ) | jq -s add > ${conf_path}OwO.conf
+        rm -r ${conf_path}owo.conf
+        echo '{"server": {"url":"https://api-test.owo.ai", "version":"v1", "update":true, "metrics":false }}' $( cat ${conf_path}owo.conf.stable ) | jq -s add > ${conf_path}owo.conf
     fi
 
     # saving identity2.json to stable state
@@ -225,11 +225,11 @@ function stable_to_unstable_server() {
     if [ -f /home/OwO/.OwO/identity/identity2.json.unstable ] ; then
         cp ${identity_path}identity2.json.unstable ${identity_path}identity2.json
     else
-        echo "NOTE:  This seems to be your first time switching to unstable. You will need to go to home-test.OwO.ai to pair on unstable."
+        echo "NOTE:  This seems to be your first time switching to unstable. You will need to go to home-test.owo.ai to pair on unstable."
     fi
 
     restart_OwO
-    echo "Set to use the home-test.OwO.ai server!"
+    echo "Set to use the home-test.owo.ai server!"
 }
 
 function unstable_to_stable_server() {
@@ -237,24 +237,24 @@ function unstable_to_stable_server() {
     identity_path=/home/OwO/.OwO/identity/
     conf_path=/home/OwO/.OwO/
 
-    # check if on stable (home.OwO.ai) already
-    cmp --silent ${conf_path}/OwO.conf ${conf_path}/OwO.conf.stable
+    # check if on stable (home.owo.ai) already
+    cmp --silent ${conf_path}/owo.conf ${conf_path}/owo.conf.stable
     if [ $? -eq 0 ] ; then
-        echo "Already set to use the home.OwO.ai server"
+        echo "Already set to use the home.owo.ai server"
         return
     fi
 
     # point api to production server
-    echo "Changing OwO.conf to point to production server api.OwO.ai"
-    if [ -f ${conf_path}OwO.conf ] ; then
-        echo '{"server": {"url":"https://api-test.OwO.ai", "version":"v1", "update":true, "metrics":false }}' $( cat ${conf_path}OwO.conf ) | jq -s add > ${conf_path}OwO.conf.unstable
+    echo "Changing owo.conf to point to production server api.owo.ai"
+    if [ -f ${conf_path}owo.conf ] ; then
+        echo '{"server": {"url":"https://api-test.owo.ai", "version":"v1", "update":true, "metrics":false }}' $( cat ${conf_path}owo.conf ) | jq -s add > ${conf_path}owo.conf.unstable
     else
-        echo "could not find OwO.conf, was it deleted?"
+        echo "could not find owo.conf, was it deleted?"
     fi
-    if [ -f ${conf_path}OwO.conf.stable ] ; then
-        cp ${conf_path}OwO.conf.stable ${conf_path}OwO.conf
+    if [ -f ${conf_path}owo.conf.stable ] ; then
+        cp ${conf_path}owo.conf.stable ${conf_path}owo.conf
     else
-        echo "ERROR:  Could not find OwO.conf.stable, was it deleted?, an easy fix would be to copy OwO.conf.unstable to OwO.conf but remove the server field"
+        echo "ERROR:  Could not find owo.conf.stable, was it deleted?, an easy fix would be to copy owo.conf.unstable to owo.conf but remove the server field"
     fi
 
     # saving identity2.json into unstable state, then copying identity2.json.stable to identity2.json
@@ -265,11 +265,11 @@ function unstable_to_stable_server() {
     if [ -f ${identity_path}identity2.json.stable ] ; then
         cp ${identity_path}identity2.json.stable ${identity_path}identity2.json
     else
-        echo "Can not find identity2.json.stable, was it deleted? You may need to repair at home.OwO.ai"
+        echo "Can not find identity2.json.stable, was it deleted? You may need to repair at home.owo.ai"
     fi
 
     restart_OwO
-    echo "Set to use the home.OwO.ai server!"
+    echo "Set to use the home.owo.ai server!"
 }
 
 if [ "${change_to}" == "unstable" ] ; then
@@ -371,8 +371,8 @@ else
     echo "  unstable         switch to the unstable debian package"
     echo "  github [<path>]  switch to the OwO-core/dev github repo"
     echo
-    echo "  home-test        switch to the test backend (home-test.OwO.ai)"
-    echo "  home             switch to the main backend (home.OwO.ai)"
+    echo "  home-test        switch to the test backend (home-test.owo.ai)"
+    echo "  home             switch to the main backend (home.owo.ai)"
     echo
     echo "Params:"
     echo "  <path>  default for github installs is /home/<user>/OwO-core"

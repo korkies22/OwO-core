@@ -32,7 +32,7 @@ def default_timezone():
         #   location.timezone.code (e.g. "America/Chicago")
         #   location.timezone.name (e.g. "Central Standard Time")
         #   location.timezone.offset (e.g. -21600000)
-        from OwO.configuration import Configuration
+        from owo.configuration import Configuration
         config = Configuration.get()
         code = config["location"]["timezone"]["code"]
 

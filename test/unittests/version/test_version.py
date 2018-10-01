@@ -16,7 +16,7 @@ import unittest
 
 import mock
 
-import OwO.version
+import owo.version
 
 
 VERSION_INFO = """
@@ -27,39 +27,39 @@ VERSION_INFO = """
 
 
 class TestVersion(unittest.TestCase):
-    @mock.patch('OwO.version.CORE_VERSION_TUPLE', (0, 8, 20))
+    @mock.patch('owo.version.CORE_VERSION_TUPLE', (0, 8, 20))
     def test_get_version(self):
         """
-            Tests for OwO.version.get_version()
+            Tests for owo.version.get_version()
 
             Assures that only lower versions return True
         """
-        self.assertTrue(OwO.version.check_version('0.0.1'))
-        self.assertTrue(OwO.version.check_version('0.8.1'))
-        self.assertTrue(OwO.version.check_version('0.8.20'))
-        self.assertFalse(OwO.version.check_version('0.8.22'))
-        self.assertFalse(OwO.version.check_version('0.9.12'))
-        self.assertFalse(OwO.version.check_version('1.0.2'))
+        self.assertTrue(owo.version.check_version('0.0.1'))
+        self.assertTrue(owo.version.check_version('0.8.1'))
+        self.assertTrue(owo.version.check_version('0.8.20'))
+        self.assertFalse(owo.version.check_version('0.8.22'))
+        self.assertFalse(owo.version.check_version('0.9.12'))
+        self.assertFalse(owo.version.check_version('1.0.2'))
 
-    @mock.patch('OwO.version.isfile')
-    @mock.patch('OwO.version.exists')
-    @mock.patch('OwO.version.open',
+    @mock.patch('owo.version.isfile')
+    @mock.patch('owo.version.exists')
+    @mock.patch('owo.version.open',
                 mock.mock_open(read_data=VERSION_INFO), create=True)
     def test_version_manager(self, mock_exists, mock_isfile):
         """
-            Test OwO.version.VersionManager.get()
+            Test owo.version.VersionManager.get()
 
             asserts that the method returns expected data
         """
         mock_isfile.return_value = True
         mock_exists.return_value = True
 
-        version = OwO.version.VersionManager.get()
+        version = owo.version.VersionManager.get()
         self.assertEquals(version['coreVersion'], "1505203453")
         self.assertEquals(version['enclosureVersion'], "1.0.0")
 
         # Check file not existing case
         mock_exists.return_value = False
-        version = OwO.version.VersionManager.get()
+        version = owo.version.VersionManager.get()
         self.assertEquals(version['coreVersion'], None)
         self.assertEquals(version['enclosureVersion'], None)

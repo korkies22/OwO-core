@@ -14,8 +14,8 @@
 #
 import vlc
 
-from OwO.audio.services import AudioBackend
-from OwO.util.log import LOG
+from owo.audio.services import AudioBackend
+from owo.util.log import LOG
 
 
 class VlcService(AudioBackend):

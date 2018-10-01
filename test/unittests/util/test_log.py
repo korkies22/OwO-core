@@ -16,7 +16,7 @@ import unittest
 import sys
 from io import StringIO
 from threading import Thread
-from OwO.util.log import LOG
+from owo.util.log import LOG
 
 
 class CaptureLogs(list):

@@ -15,9 +15,9 @@
 # limitations under the License.
 #
 
-from OwO.util.lang.format_common import convert_to_mixed_fraction
+from owo.util.lang.format_common import convert_to_mixed_fraction
 import collections
-from OwO.util.log import LOG
+from owo.util.log import LOG
 
 
 NUM_STRING_EN = {

@@ -14,10 +14,10 @@
 #
 from tornado import autoreload, web, ioloop
 
-from OwO.configuration import Configuration
-from OwO.lock import Lock  # creates/supports PID locking file
-from OwO.messagebus.service.ws import WebsocketEventHandler
-from OwO.util import validate_param, reset_sigint_handler, create_daemon, \
+from owo.configuration import Configuration
+from owo.lock import Lock  # creates/supports PID locking file
+from owo.messagebus.service.ws import WebsocketEventHandler
+from owo.util import validate_param, reset_sigint_handler, create_daemon, \
     wait_for_exit_signal
 
 settings = {

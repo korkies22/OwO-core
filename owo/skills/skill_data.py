@@ -21,7 +21,7 @@ from os import walk
 from os.path import splitext, join
 import re
 
-from OwO.messagebus.message import Message
+from owo.messagebus.message import Message
 
 
 def load_vocab_from_file(path, vocab_type, bus):

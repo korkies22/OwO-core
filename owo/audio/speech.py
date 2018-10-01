@@ -16,12 +16,12 @@ import re
 import time
 from threading import Lock
 
-from OwO.configuration import Configuration
-from OwO.metrics import report_timing, Stopwatch
-from OwO.tts import TTSFactory
-from OwO.util import create_signal, check_for_signal
-from OwO.util.log import LOG
-from OwO.messagebus.message import Message
+from owo.configuration import Configuration
+from owo.messagebus.message import Message
+from owo.metrics import report_timing, Stopwatch
+from owo.tts import TTSFactory
+from owo.util import create_signal, check_for_signal
+from owo.util.log import LOG
 
 bus = None  # OwO messagebus connection
 config = None
@@ -130,7 +130,7 @@ def handle_stop(event):
         _last_stop_signal = time.time()
         tts.playback.clear_queue()
         tts.playback.clear_visimes()
-        bus.emit(Message("OwO.stop.handled", {"by": "TTS"}))
+        bus.emit(Message("owo.stop.handled", {"by": "TTS"}))
 
 
 def init(messagebus):
@@ -148,10 +148,10 @@ def init(messagebus):
     bus = messagebus
     Configuration.init(bus)
     config = Configuration.get()
-    bus.on('OwO.stop', handle_stop)
-    bus.on('OwO.audio.speech.stop', handle_stop)
+    bus.on('owo.stop', handle_stop)
+    bus.on('owo.audio.speech.stop', handle_stop)
     bus.on('speak', handle_speak)
-    bus.on('OwO.mic.listen', _start_listener)
+    bus.on('owo.mic.listen', _start_listener)
 
     tts = TTSFactory.create()
     tts.init(bus)

@@ -1,44 +1,44 @@
-OwO.util package
+owo.util package
 ====================
 
 LOG
 ---
-.. autofunction:: OwO.util.LOG
+.. autofunction:: owo.util.LOG
 
 play_wav
 ---------
-.. autofunction:: OwO.util.play_wav
+.. autofunction:: owo.util.play_wav
 
 play_mp3
 ---------
-.. autofunction:: OwO.util.play_mp3
+.. autofunction:: owo.util.play_mp3
 
 extract_datetime
 ----------------
-.. autofunction:: OwO.util.extract_datetime
+.. autofunction:: owo.util.extract_datetime
 
 extractnumber
 -------------
-.. autofunction:: OwO.util.extractnumber
+.. autofunction:: owo.util.extractnumber
 
 normalize
 ---------
-.. autofunction:: OwO.util.normalize
+.. autofunction:: owo.util.normalize
 
 nice_number
 -----------
-.. autofunction:: OwO.util.nice_number
+.. autofunction:: owo.util.nice_number
 
 convert_number
 --------------
-.. autofunction:: OwO.util.convert_number
+.. autofunction:: owo.util.convert_number
 
 resolve_resource_file
 ---------------------
-.. autofunction:: OwO.util.resolve_resource_file
+.. autofunction:: owo.util.resolve_resource_file
 
 get_cache_directory
 -------------------
-.. autofunction:: OwO.util.get_cache_directory
+.. autofunction:: owo.util.get_cache_directory
 
 

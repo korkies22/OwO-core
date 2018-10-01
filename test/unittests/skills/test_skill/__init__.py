@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-from OwO.skills.core import OwOSkill
+from owo.skills.core import OwOSkill
 
 
 class LoadTestSkill(OwOSkill):

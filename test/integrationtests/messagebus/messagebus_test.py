@@ -23,8 +23,8 @@ import unittest
 from subprocess import Popen, call
 from threading import Thread
 
-from OwO.messagebus.client.ws import WebsocketClient
-from OwO.messagebus.message import Message
+from owo.messagebus.client.ws import WebsocketClient
+from owo.messagebus.message import Message
 
 
 class TestMessagebusMethods(unittest.TestCase):

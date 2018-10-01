@@ -17,11 +17,11 @@
 import unittest
 import datetime
 
-from OwO.util.format import nice_number
-from OwO.util.format import nice_time
-from OwO.util.format import pronounce_number
-from OwO.util.lang.format_de import nice_response_de
-from OwO.util.lang.format_de import pronounce_ordinal_de
+from owo.util.format import nice_number
+from owo.util.format import nice_time
+from owo.util.format import pronounce_number
+from owo.util.lang.format_de import nice_response_de
+from owo.util.lang.format_de import pronounce_ordinal_de
 
 # fractions are not capitalized for now
 NUMBERS_FIXTURE_DE = {

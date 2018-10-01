@@ -87,7 +87,7 @@ htmlhelp_basename = 'OwOdoc'
 
 latex_elements = {}
 latex_documents = [
-    (master_doc, 'OwO.tex', 'OwO Documentation',
+    (master_doc, 'owo.tex', 'OwO Documentation',
      'Matthew Scholefield', 'manual'),
 ]
 

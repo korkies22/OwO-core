@@ -36,7 +36,7 @@ from test.integrationtests.skills.skill_tester import SkillTest
 desc = "Standalone test utility for OwO Skills.  This will execute the " \
     "tests defined under the Skill's test/intent folder.  For more " \
     "information on creating tests, see:  " \
-    "https://OwO.ai/documentation/skills/automatic-testing/"
+    "https://owo.ai/documentation/skills/automatic-testing/"
 
 # Get path to skill(s) to test from command line, default to cwd
 parser = argparse.ArgumentParser(description=desc)

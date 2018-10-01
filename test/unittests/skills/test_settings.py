@@ -18,7 +18,7 @@ import unittest
 from os import remove
 from os.path import join, dirname
 
-from OwO.skills.settings import SkillSettings
+from owo.skills.settings import SkillSettings
 
 
 class SkillSettingsTest(unittest.TestCase):

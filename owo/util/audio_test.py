@@ -18,9 +18,9 @@ from contextlib import contextmanager
 
 from speech_recognition import Recognizer
 
-from OwO.client.speech.mic import MutableMicrophone
-from OwO.util import play_wav
-from OwO.util.log import LOG
+from owo.client.speech.mic import MutableMicrophone
+from owo.util import play_wav
+from owo.util.log import LOG
 import logging
 
 """

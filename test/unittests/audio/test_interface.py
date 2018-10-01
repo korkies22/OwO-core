@@ -19,8 +19,8 @@ from time import sleep
 
 from os.path import exists
 
-import OwO.audio
-from OwO.util import create_signal, check_for_signal
+import owo.audio
+from owo.util import create_signal, check_for_signal
 
 """
     Tests for public interface for audio interface
@@ -32,7 +32,7 @@ done_waiting = False
 
 def wait_while_speaking_thread():
     global done_waiting
-    OwO.audio.wait_while_speaking()
+    owo.audio.wait_while_speaking()
     done_waiting = True
 
 
@@ -43,10 +43,10 @@ class TestInterface(unittest.TestCase):
 
     def test_is_speaking(self):
         create_signal('isSpeaking')
-        self.assertTrue(OwO.audio.is_speaking())
+        self.assertTrue(owo.audio.is_speaking())
         # Check that the signal hasn't been removed
         self.assertTrue(check_for_signal('isSpeaking'))
-        self.assertFalse(OwO.audio.is_speaking())
+        self.assertFalse(owo.audio.is_speaking())
 
     def test_wait_while_speaking(self):
         # Check that test terminates

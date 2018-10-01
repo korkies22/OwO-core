@@ -14,8 +14,8 @@
 #
 import requests
 
-from OwO.tts import TTSValidator
-from OwO.tts.remote_tts import RemoteTTS
+from owo.tts import TTSValidator
+from owo.tts.remote_tts import RemoteTTS
 
 
 class MaryTTS(RemoteTTS):

@@ -14,8 +14,8 @@
 #
 from adapt.intent import IntentBuilder
 
-from OwO.skills.core import OwOSkill
-from OwO.skills.core import intent_handler, intent_file_handler
+from owo.skills.core import OwOSkill
+from owo.skills.core import intent_handler, intent_file_handler
 
 
 class TestSkill(OwOSkill):

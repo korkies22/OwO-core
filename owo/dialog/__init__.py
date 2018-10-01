@@ -20,8 +20,8 @@ import re
 from pathlib import Path
 from os.path import join
 
-from OwO.util import resolve_resource_file
-from OwO.util.log import LOG
+from owo.util import resolve_resource_file
+from owo.util.log import LOG
 
 
 __doc__ = """
@@ -140,7 +140,7 @@ def get(phrase, lang=None, context=None):
     """
 
     if not lang:
-        from OwO.configuration import Configuration
+        from owo.configuration import Configuration
         lang = Configuration.get().get("lang")
 
     filename = "text/" + lang.lower() + "/" + phrase + ".dialog"

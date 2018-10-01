@@ -20,20 +20,20 @@ from threading import Thread, Timer
 
 import serial
 
-import OwO.dialog
-from OwO.api import has_been_paired
-from OwO.audio import wait_while_speaking
-from OwO.client.enclosure.arduino import EnclosureArduino
-from OwO.enclosure.display_manager import \
+import owo.dialog
+from owo.api import has_been_paired
+from owo.audio import wait_while_speaking
+from owo.client.enclosure.arduino import EnclosureArduino
+from owo.enclosure.display_manager import \
     init_display_manager_bus_connection
-from OwO.client.enclosure.eyes import EnclosureEyes
-from OwO.client.enclosure.mouth import EnclosureMouth
-from OwO.configuration import Configuration, LocalConf, USER_CONFIG
-from OwO.messagebus.client.ws import WebsocketClient
-from OwO.messagebus.message import Message
-from OwO.util import play_wav, create_signal, connected, check_for_signal
-from OwO.util.audio_test import record
-from OwO.util.log import LOG
+from owo.client.enclosure.eyes import EnclosureEyes
+from owo.client.enclosure.mouth import EnclosureMouth
+from owo.configuration import Configuration, LocalConf, USER_CONFIG
+from owo.messagebus.client.ws import WebsocketClient
+from owo.messagebus.message import Message
+from owo.util import play_wav, create_signal, connected, check_for_signal
+from owo.util.audio_test import record
+from owo.util.log import LOG
 from queue import Queue
 
 
@@ -62,7 +62,7 @@ class EnclosureReader(Thread):
         self.start()
 
         # Notifications from OwO-core
-        self.bus.on("OwO.stop.handled", self.on_stop_handled)
+        self.bus.on("owo.stop.handled", self.on_stop_handled)
 
     def read(self):
         while self.alive:
@@ -87,7 +87,7 @@ class EnclosureReader(Thread):
         # TODO: Look into removing this emit altogether.
         # We need to check if any other serial bus messages
         # are handled by other parts of the code
-        if "OwO.stop" not in data:
+        if "owo.stop" not in data:
             self.bus.emit(Message(data))
 
         if "Command: system.version" in data:
@@ -95,17 +95,17 @@ class EnclosureReader(Thread):
             # sent during the construction of Enclosure()
             self.bus.emit(Message("enclosure.started"))
 
-        if "OwO.stop" in data:
+        if "owo.stop" in data:
             if has_been_paired():
                 create_signal('buttonPress')
-                self.bus.emit(Message("OwO.stop"))
+                self.bus.emit(Message("owo.stop"))
 
         if "volume.up" in data:
-            self.bus.emit(Message("OwO.volume.increase",
+            self.bus.emit(Message("owo.volume.increase",
                                   {'play_sound': True}))
 
         if "volume.down" in data:
-            self.bus.emit(Message("OwO.volume.decrease",
+            self.bus.emit(Message("owo.volume.decrease",
                                   {'play_sound': True}))
 
         if "system.test.begin" in data:
@@ -154,7 +154,7 @@ class EnclosureReader(Thread):
 
         if "unit.factory-reset" in data:
             self.bus.emit(Message("speak", {
-                'utterance': OwO.dialog.get("reset to factory defaults")}))
+                'utterance': owo.dialog.get("reset to factory defaults")}))
             subprocess.call(
                 'rm ~/.OwO/identity/identity2.json',
                 shell=True)
@@ -171,13 +171,13 @@ class EnclosureReader(Thread):
             # This is handled by the wifi client
             self.bus.emit(Message("system.ssh.enable"))
             self.bus.emit(Message("speak", {
-                'utterance': OwO.dialog.get("ssh enabled")}))
+                'utterance': owo.dialog.get("ssh enabled")}))
 
         if "unit.disable-ssh" in data:
             # This is handled by the wifi client
             self.bus.emit(Message("system.ssh.disable"))
             self.bus.emit(Message("speak", {
-                'utterance': OwO.dialog.get("ssh disabled")}))
+                'utterance': owo.dialog.get("ssh disabled")}))
 
         if "unit.enable-learning" in data or "unit.disable-learning" in data:
             enable = 'enable' in data
@@ -190,7 +190,7 @@ class EnclosureReader(Thread):
             user_config.store()
 
             self.bus.emit(Message("speak", {
-                'utterance': OwO.dialog.get("learning " + word)}))
+                'utterance': owo.dialog.get("learning " + word)}))
 
     def stop(self):
         self.alive = False
@@ -390,10 +390,10 @@ class Enclosure(object):
 
     def _handle_pairing_complete(self, Message):
         """
-            Handler for 'OwO.paired', unmutes the mic after the pairing is
+            Handler for 'owo.paired', unmutes the mic after the pairing is
             complete.
         """
-        self.bus.emit(Message("OwO.mic.unmute"))
+        self.bus.emit(Message("owo.mic.unmute"))
 
     def _do_net_check(self):
         # TODO: This should live in the derived Enclosure, e.g. Enclosure_Mark1
@@ -413,12 +413,12 @@ class Enclosure(object):
                 # TODO: Enclosure/localization
 
                 # Don't listen to mic during this out-of-box experience
-                self.bus.emit(Message("OwO.mic.mute"))
+                self.bus.emit(Message("owo.mic.mute"))
                 # Setup handler to unmute mic at the end of on boarding
                 # i.e. after pairing is complete
-                self.bus.once('OwO.paired', self._handle_pairing_complete)
+                self.bus.once('owo.paired', self._handle_pairing_complete)
 
-                self.speak(OwO.dialog.get('OwO.intro'))
+                self.speak(owo.dialog.get('owo.intro'))
                 wait_while_speaking()
                 time.sleep(2)  # a pause sounds better than just jumping in
 

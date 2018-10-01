@@ -16,8 +16,8 @@ import time
 from threading import Lock
 from uuid import uuid4
 
-from OwO.configuration import Configuration
-from OwO.util.log import LOG
+from owo.configuration import Configuration
+from owo.util.log import LOG
 
 
 class Session(object):

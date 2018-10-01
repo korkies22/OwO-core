@@ -29,19 +29,19 @@ from os.path import join, abspath, dirname, basename, exists
 from threading import Event, Timer
 
 from OwO import dialog
-from OwO.api import DeviceApi
-from OwO.audio import wait_while_speaking
-from OwO.enclosure.api import EnclosureAPI
-from OwO.configuration import Configuration
-from OwO.dialog import DialogLoader
-from OwO.filesystem import FileSystemAccess
-from OwO.messagebus.message import Message
-from OwO.metrics import report_metric, report_timing, Stopwatch
-from OwO.skills.settings import SkillSettings
-from OwO.skills.skill_data import (load_vocabulary, load_regex, to_alnum,
+from owo.api import DeviceApi
+from owo.audio import wait_while_speaking
+from owo.enclosure.api import EnclosureAPI
+from owo.configuration import Configuration
+from owo.dialog import DialogLoader
+from owo.filesystem import FileSystemAccess
+from owo.messagebus.message import Message
+from owo.metrics import report_metric, report_timing, Stopwatch
+from owo.skills.settings import SkillSettings
+from owo.skills.skill_data import (load_vocabulary, load_regex, to_alnum,
                                        munge_regex, munge_intent_parser)
-from OwO.util import camel_case_split, resolve_resource_file
-from OwO.util.log import LOG
+from owo.util import camel_case_split, resolve_resource_file
+from owo.util.log import LOG
 
 MainModule = '__init__'
 
@@ -274,13 +274,13 @@ class OwOSkill(object):
         if bus:
             self.bus = bus
             self.enclosure = EnclosureAPI(bus, self.name)
-            self.add_event('OwO.stop', self.__handle_stop)
-            self.add_event('OwO.skill.enable_intent',
+            self.add_event('owo.stop', self.__handle_stop)
+            self.add_event('owo.skill.enable_intent',
                            self.handle_enable_intent)
-            self.add_event('OwO.skill.disable_intent',
+            self.add_event('owo.skill.disable_intent',
                            self.handle_disable_intent)
 
-            name = 'OwO.skills.settings.update'
+            name = 'owo.skills.settings.update'
             func = self.settings.run_poll
             bus.on(name, func)
             self.events.append((name, func))
@@ -781,7 +781,7 @@ class OwOSkill(object):
         munge_intent_parser(intent_parser, name, self.skill_id)
         self.bus.emit(Message("register_intent", intent_parser.__dict__))
         self.registered_intents.append((name, intent_parser))
-        self.add_event(intent_parser.name, handler, 'OwO.skill.handler')
+        self.add_event(intent_parser.name, handler, 'owo.skill.handler')
 
     def register_intent_file(self, intent_file, handler):
         """
@@ -822,7 +822,7 @@ class OwOSkill(object):
         }
         self.bus.emit(Message("padatious:register_intent", data))
         self.registered_intents.append((intent_file, data))
-        self.add_event(name, handler, 'OwO.skill.handler')
+        self.add_event(name, handler, 'owo.skill.handler')
 
     def register_entity_file(self, entity_file):
         """ Register an Entity file with the intent service.
@@ -1034,19 +1034,19 @@ class OwOSkill(object):
 
     def __handle_stop(self, event):
         """
-            Handler for the "OwO.stop" signal. Runs the user defined
+            Handler for the "owo.stop" signal. Runs the user defined
             `stop()` method.
         """
 
         def __stop_timeout():
             # The self.stop() call took more than 100ms, assume it handled Stop
-            self.bus.emit(Message("OwO.stop.handled",
+            self.bus.emit(Message("owo.stop.handled",
                                   {"skill_id": str(self.skill_id) + ":"}))
 
         timer = Timer(0.1, __stop_timeout)  # set timer for 100ms
         try:
             if self.stop():
-                self.bus.emit(Message("OwO.stop.handled",
+                self.bus.emit(Message("owo.stop.handled",
                                       {"by": "skill:"+str(self.skill_id)}))
             timer.cancel()
         except:
@@ -1126,7 +1126,7 @@ class OwOSkill(object):
         event_data['event'] = unique_name
         event_data['repeat'] = repeat
         event_data['data'] = data
-        self.bus.emit(Message('OwO.scheduler.schedule_event',
+        self.bus.emit(Message('owo.scheduler.schedule_event',
                               data=event_data))
 
     def schedule_event(self, handler, when, data=None, name=None):
@@ -1179,7 +1179,7 @@ class OwOSkill(object):
             'event': self._unique_name(name),
             'data': data
         }
-        self.bus.emit(Message('OwO.schedule.update_event', data=data))
+        self.bus.emit(Message('owo.schedule.update_event', data=data))
 
     def cancel_scheduled_event(self, name):
         """
@@ -1194,7 +1194,7 @@ class OwOSkill(object):
         if name in self.scheduled_repeats:
             self.scheduled_repeats.remove(name)
         if self.remove_event(unique_name):
-            self.bus.emit(Message('OwO.scheduler.remove_event',
+            self.bus.emit(Message('owo.scheduler.remove_event',
                                   data=data))
 
     def get_scheduled_event_status(self, name):
@@ -1222,9 +1222,9 @@ class OwOSkill(object):
                 event_status[0] = time_left_in_seconds
             finished_callback[0] = True
 
-        emitter_name = 'OwO.event_status.callback.{}'.format(event_name)
+        emitter_name = 'owo.event_status.callback.{}'.format(event_name)
         self.bus.once(emitter_name, callback)
-        self.bus.emit(Message('OwO.scheduler.get_event', data=data))
+        self.bus.emit(Message('owo.scheduler.get_event', data=data))
 
         start_wait = time.time()
         while finished_callback[0] is False and time.time() - start_wait < 3.0:
@@ -1265,7 +1265,7 @@ class FallbackSkill(OwOSkill):
 
         def handler(message):
             # indicate fallback handling start
-            bus.emit(message.reply("OwO.skill.handler.start",
+            bus.emit(message.reply("owo.skill.handler.start",
                                    data={'handler': "fallback"}))
 
             stopwatch = Stopwatch()
@@ -1278,7 +1278,7 @@ class FallbackSkill(OwOSkill):
                             #  indicate completion
                             handler_name = get_handler_name(handler)
                             bus.emit(message.reply(
-                                     'OwO.skill.handler.complete',
+                                     'owo.skill.handler.complete',
                                      data={'handler': "fallback",
                                            "fallback_handler": handler_name}))
                             break
@@ -1289,7 +1289,7 @@ class FallbackSkill(OwOSkill):
                     warning = "No fallback could handle intent."
                     LOG.warning(warning)
                     #  indicate completion with exception
-                    bus.emit(message.reply('OwO.skill.handler.complete',
+                    bus.emit(message.reply('owo.skill.handler.complete',
                                            data={'handler': "fallback",
                                                  'exception': warning}))
 

@@ -17,7 +17,7 @@ import unittest
 
 from speech_recognition import AudioSource
 
-from OwO.client.speech.mic import ResponsiveRecognizer
+from owo.client.speech.mic import ResponsiveRecognizer
 
 
 class MockStream(object):

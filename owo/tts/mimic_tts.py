@@ -22,11 +22,11 @@ import os.path
 from os.path import exists, join, expanduser
 
 from OwO import OwO_ROOT_PATH
-from OwO.api import DeviceApi
-from OwO.configuration import Configuration
-from OwO.tts import TTS, TTSValidator
-from OwO.util.download import download
-from OwO.util.log import LOG
+from owo.api import DeviceApi
+from owo.configuration import Configuration
+from owo.tts import TTS, TTSValidator
+from owo.util.download import download
+from owo.util.log import LOG
 
 config = Configuration.get().get("tts").get("mimic")
 data_dir = expanduser(Configuration.get()['data_dir'])

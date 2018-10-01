@@ -21,8 +21,8 @@ import pyee
 from os.path import dirname, join
 from speech_recognition import AudioSource
 
-from OwO.client.speech.listener import RecognizerLoop
-from OwO.client.speech.mic import ResponsiveRecognizer
+from owo.client.speech.listener import RecognizerLoop
+from owo.client.speech.mic import ResponsiveRecognizer
 
 
 def to_percent(val):

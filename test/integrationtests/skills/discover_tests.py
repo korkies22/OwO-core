@@ -19,7 +19,7 @@ import os
 from os.path import exists, join, expanduser, abspath
 import imp
 
-from OwO.configuration import Configuration
+from owo.configuration import Configuration
 from test.integrationtests.skills.skill_tester import MockSkillsLoader
 from test.integrationtests.skills.skill_tester import SkillTest
 

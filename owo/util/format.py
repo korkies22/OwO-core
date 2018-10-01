@@ -13,16 +13,16 @@
 # limitations under the License.
 #
 
-from OwO.util.lang.format_en import *
-from OwO.util.lang.format_pt import *
-from OwO.util.lang.format_it import *
-from OwO.util.lang.format_sv import *
-from OwO.util.lang.format_de import nice_number_de
-from OwO.util.lang.format_de import nice_time_de
-from OwO.util.lang.format_de import pronounce_number_de
-from OwO.util.lang.format_fr import nice_number_fr
-from OwO.util.lang.format_fr import nice_time_fr
-from OwO.util.lang.format_fr import pronounce_number_fr
+from owo.util.lang.format_en import *
+from owo.util.lang.format_pt import *
+from owo.util.lang.format_it import *
+from owo.util.lang.format_sv import *
+from owo.util.lang.format_de import nice_number_de
+from owo.util.lang.format_de import nice_time_de
+from owo.util.lang.format_de import pronounce_number_de
+from owo.util.lang.format_fr import nice_number_fr
+from owo.util.lang.format_fr import nice_time_fr
+from owo.util.lang.format_fr import pronounce_number_fr
 
 from collections import namedtuple
 import json

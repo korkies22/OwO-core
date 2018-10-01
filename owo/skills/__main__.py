@@ -14,14 +14,14 @@
 #
 import time
 from threading import Timer
-import OwO.lock
+import owo.lock
 from OwO import dialog
-from OwO.api import is_paired, BackendDown
-from OwO.enclosure.api import EnclosureAPI
-from OwO.configuration import Configuration
-from OwO.messagebus.client.ws import WebsocketClient
-from OwO.messagebus.message import Message
-from OwO.util import (
+from owo.api import is_paired, BackendDown
+from owo.enclosure.api import EnclosureAPI
+from owo.configuration import Configuration
+from owo.messagebus.client.ws import WebsocketClient
+from owo.messagebus.message import Message
+from owo.util import (
     connected, wait_while_speaking, reset_sigint_handler,
     create_echo_function, create_daemon, wait_for_exit_signal
 )
@@ -32,7 +32,7 @@ from .event_scheduler import EventScheduler
 from .intent_service import IntentService
 from .padatious_service import PadatiousService
 
-bus = None  # OwO messagebus reference, see "OwO.messagebus"
+bus = None  # OwO messagebus reference, see "owo.messagebus"
 event_scheduler = None
 skill_manager = None
 
@@ -123,7 +123,7 @@ def check_connection():
             bus.emit(Message("enclosure.mouth.reset"))
             time.sleep(0.5)
 
-        bus.emit(Message('OwO.internet.connected'))
+        bus.emit(Message('owo.internet.connected'))
         # check for pairing, if not automatically start pairing
         try:
             if not is_paired(ignore_errors=False):
@@ -133,7 +133,7 @@ def check_connection():
                 }
                 bus.emit(Message("recognizer_loop:utterance", payload))
             else:
-                from OwO.api import DeviceApi
+                from owo.api import DeviceApi
                 api = DeviceApi()
                 api.update_version()
         except BackendDown:
@@ -151,7 +151,7 @@ def main():
     global bus
     reset_sigint_handler()
     # Create PID file, prevent multiple instancesof this service
-    OwO.lock.Lock('skills')
+    owo.lock.Lock('skills')
     # Connect this Skill management process to the OwO Messagebus
     bus = WebsocketClient()
     Configuration.init(bus)

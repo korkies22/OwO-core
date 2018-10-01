@@ -20,8 +20,8 @@ import inflection
 from os.path import exists, isfile, join, dirname, expanduser
 from requests import RequestException
 
-from OwO.util.json_helper import load_commented_json
-from OwO.util.log import LOG
+from owo.util.json_helper import load_commented_json
+from owo.util.log import LOG
 
 
 def merge_dict(base, delta):
@@ -144,20 +144,20 @@ class LocalConf(dict):
 
 class RemoteConf(LocalConf):
     """
-        Config dict fetched from OwO.ai
+        Config dict fetched from owo.ai
     """
     def __init__(self, cache=None):
         super(RemoteConf, self).__init__(None)
 
         cache = cache or '/var/tmp/OwO_web_cache.json'
-        from OwO.api import is_paired
+        from owo.api import is_paired
         if not is_paired():
             self.load_local(cache)
             return
 
         try:
             # Here to avoid cyclic import
-            from OwO.api import DeviceApi
+            from owo.api import DeviceApi
             api = DeviceApi()
             setting = api.get_settings()
 
@@ -189,10 +189,10 @@ class RemoteConf(LocalConf):
             self.load_local(cache)
 
 
-DEFAULT_CONFIG = join(dirname(__file__), 'OwO.conf')
-SYSTEM_CONFIG = '/etc/OwO/OwO.conf'
-USER_CONFIG = join(expanduser('~'), '.OwO/OwO.conf')
-REMOTE_CONFIG = "OwO.ai"
+DEFAULT_CONFIG = join(dirname(__file__), 'owo.conf')
+SYSTEM_CONFIG = '/etc/OwO/owo.conf'
+USER_CONFIG = join(expanduser('~'), '.OwO/owo.conf')
+REMOTE_CONFIG = "owo.ai"
 
 
 class Configuration(object):

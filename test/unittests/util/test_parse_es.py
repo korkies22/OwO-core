@@ -16,7 +16,7 @@
 #
 import unittest
 
-from OwO.util.parse import normalize
+from owo.util.parse import normalize
 
 
 class TestNormalize(unittest.TestCase):

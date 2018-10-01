@@ -17,7 +17,7 @@ import unittest
 
 from os.path import dirname, join
 
-from OwO.util.json_helper import load_commented_json
+from owo.util.json_helper import load_commented_json
 
 
 class TestFileLoad(unittest.TestCase):

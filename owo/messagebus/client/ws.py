@@ -22,10 +22,10 @@ from pyee import EventEmitter
 from websocket import (WebSocketApp, WebSocketConnectionClosedException,
                        WebSocketException)
 
-from OwO.configuration import Configuration
-from OwO.messagebus.message import Message
-from OwO.util import validate_param, create_echo_function
-from OwO.util.log import LOG
+from owo.configuration import Configuration
+from owo.messagebus.message import Message
+from owo.util import validate_param, create_echo_function
+from owo.util.log import LOG
 
 
 class WebsocketClient(object):

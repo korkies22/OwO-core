@@ -21,7 +21,7 @@ import os  # Operating System functions
 #
 # Wrapper around chain of handler functions for a specific system level signal.
 # Often used to trap Ctrl-C for specific application purposes.
-from OwO.util import LOG
+from owo.util import LOG
 
 
 class Signal(object):  # python 3+ class Signal

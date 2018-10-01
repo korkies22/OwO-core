@@ -15,7 +15,7 @@
 # limitations under the License.
 #
 
-from OwO.util.lang.format_common import convert_to_mixed_fraction
+from owo.util.lang.format_common import convert_to_mixed_fraction
 
 FRACTION_STRING_PT = {
     2: 'meio',

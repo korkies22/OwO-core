@@ -13,7 +13,7 @@
 # limitations under the License.
 #
 import requests
-from OwO.tts import TTS, TTSValidator
+from owo.tts import TTS, TTSValidator
 
 
 class ResponsiveVoice(TTS):

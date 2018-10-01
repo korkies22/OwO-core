@@ -14,9 +14,9 @@
 #
 import sys
 import json
-from OwO.messagebus.client.ws import WebsocketClient
-from OwO.messagebus.message import Message
-from OwO.configuration import ConfigurationManager
+from owo.messagebus.client.ws import WebsocketClient
+from owo.messagebus.message import Message
+from owo.configuration import ConfigurationManager
 from websocket import create_connection
 
 
@@ -39,15 +39,15 @@ def main():
             dataToSend = json.loads(sys.argv[2])
         except BaseException:
             print("Second argument must be a JSON string")
-            print("Ex: python -m OwO.messagebus.send speak "
+            print("Ex: python -m owo.messagebus.send speak "
                   "'{\"utterance\" : \"hello\"}'")
             exit()
     else:
         print("Command line interface to the OwO-core messagebus.")
-        print("Usage: python -m OwO.messagebus.send message")
-        print("       python -m OwO.messagebus.send message JSON-string\n")
-        print("Examples: python -m OwO.messagebus.send system.wifi.setup")
-        print("Ex: python -m OwO.messagebus.send speak "
+        print("Usage: python -m owo.messagebus.send message")
+        print("       python -m owo.messagebus.send message JSON-string\n")
+        print("Examples: python -m owo.messagebus.send system.wifi.setup")
+        print("Ex: python -m owo.messagebus.send speak "
               "'{\"utterance\" : \"hello\"}'")
         exit()
 

@@ -21,12 +21,12 @@ DOCS_NAME = "OwO-skills-sdk"
 DOC_OUTPUT_DIR = "build/doc/%s/html" % DOCS_NAME
 
 documented_sdk_modules = [
-    "OwO.configuration",
-    "OwO.dialog",
-    "OwO.filesystem",
-    "OwO.session",
-    "OwO.util",
-    "OwO.util.log"
+    "owo.configuration",
+    "owo.dialog",
+    "owo.filesystem",
+    "owo.session",
+    "owo.util",
+    "owo.util.log"
 ]
 
 
@@ -55,7 +55,7 @@ def main():
         with open(module_to_docpath(m), 'w') as f:
             f.write(html)
     import OwO
-    OwO.__all__ = [m[8:] for m in documented_sdk_modules]
+    owo.__all__ = [m[8:] for m in documented_sdk_modules]
     root_module = pdoc.Module(OwO)
     html = root_module.html(external_links=False, link_prefix='', source=True)
     with open(module_to_docpath("OwO"), 'w') as f:

@@ -19,7 +19,7 @@ import os
 import os.path
 
 import OwO
-from OwO.util.log import LOG
+from owo.util.log import LOG
 
 
 def get_ipc_directory(domain=None):
@@ -35,7 +35,7 @@ def get_ipc_directory(domain=None):
     Returns:
         str: a path to the IPC directory
     """
-    config = OwO.configuration.Configuration.get()
+    config = owo.configuration.Configuration.get()
     dir = config.get("ipc_path")
     if not dir:
         # If not defined, use /tmp/OwO/ipc

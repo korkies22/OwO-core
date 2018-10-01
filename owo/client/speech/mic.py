@@ -31,16 +31,16 @@ from speech_recognition import (
 )
 from threading import Thread, Lock
 
-from OwO.api import DeviceApi
-from OwO.configuration import Configuration
-from OwO.session import SessionManager
-from OwO.util import (
+from owo.api import DeviceApi
+from owo.configuration import Configuration
+from owo.session import SessionManager
+from owo.util import (
     check_for_signal,
     get_ipc_directory,
     resolve_resource_file,
     play_wav
 )
-from OwO.util.log import LOG
+from owo.util.log import LOG
 
 
 class MutableStream(object):

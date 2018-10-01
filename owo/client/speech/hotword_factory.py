@@ -28,8 +28,8 @@ from shutil import rmtree
 from threading import Timer, Event, Thread
 from urllib.error import HTTPError
 
-from OwO.configuration import Configuration, LocalConf, USER_CONFIG
-from OwO.util.log import LOG
+from owo.configuration import Configuration, LocalConf, USER_CONFIG
+from owo.util.log import LOG
 
 RECOGNIZER_DIR = join(abspath(dirname(__file__)), "recognizer")
 INIT_TIMEOUT = 10  # In seconds
@@ -100,7 +100,7 @@ class PocketsphinxHotWord(HotWordEngine):
         self.decoder.process_raw(byte_data, False, False)
         self.decoder.end_utt()
         if metrics:
-            metrics.timer("OwO.stt.local.time_s", time.time() - start)
+            metrics.timer("owo.stt.local.time_s", time.time() - start)
         return self.decoder.hyp()
 
     def found_wake_word(self, frame_data):
@@ -116,7 +116,7 @@ class PreciseHotword(HotWordEngine):
         )
         local_conf = LocalConf(USER_CONFIG)
         if local_conf.get('precise', {}).get('dist_url') == \
-                'http://bootstrap.OwO.ai/artifacts/static/daily/':
+                'http://bootstrap.owo.ai/artifacts/static/daily/':
             del local_conf['precise']['dist_url']
             local_conf.store()
             Configuration.updated(None)

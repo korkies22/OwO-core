@@ -14,11 +14,11 @@
 #
 from os.path import abspath, dirname, join
 
-from OwO.api import Api
-from OwO.messagebus.message import Message
-from OwO.skills.context import adds_context, removes_context
-from OwO.skills.core import OwOSkill, FallbackSkill, \
+from owo.api import Api
+from owo.messagebus.message import Message
+from owo.skills.context import adds_context, removes_context
+from owo.skills.core import OwOSkill, FallbackSkill, \
     intent_handler, intent_file_handler
-from OwO.skills.intent_service import AdaptIntent
+from owo.skills.intent_service import AdaptIntent
 
 OwO_ROOT_PATH = abspath(join(dirname(__file__), '..'))

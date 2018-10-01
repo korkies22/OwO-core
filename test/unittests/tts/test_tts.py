@@ -1,15 +1,15 @@
 import unittest
 
-import OwO.tts
+import owo.tts
 
 
 class TestTTS(unittest.TestCase):
     def test_ssml_support(self):
-        class TestTTS(OwO.tts.TTS):
+        class TestTTS(owo.tts.TTS):
             def execute(self, sentence, ident=None):
                 pass
 
-        class TestTTSValidator(OwO.tts.TTSValidator):
+        class TestTTSValidator(owo.tts.TTSValidator):
             def validate(self):
                 pass
 
@@ -75,5 +75,5 @@ class TestTTS(unittest.TestCase):
         self.assertEqual(tts.validate_ssml(sentence_bad_ssml),
                          sentence_no_ssml)
 
-        self.assertEqual(OwO.tts.TTS.remove_ssml(sentence),
+        self.assertEqual(owo.tts.TTS.remove_ssml(sentence),
                          sentence_no_ssml)

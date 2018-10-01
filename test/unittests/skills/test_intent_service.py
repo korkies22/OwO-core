@@ -14,7 +14,7 @@
 #
 import unittest
 
-from OwO.skills.intent_service import ContextManager
+from owo.skills.intent_service import ContextManager
 
 
 class MockEmitter(object):

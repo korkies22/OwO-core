@@ -21,14 +21,14 @@ from requests import RequestException, HTTPError
 from requests.exceptions import ConnectionError
 
 from OwO import dialog
-from OwO.client.speech.hotword_factory import HotWordFactory
-from OwO.client.speech.mic import MutableMicrophone, ResponsiveRecognizer
-from OwO.configuration import Configuration
-from OwO.metrics import MetricsAggregator, Stopwatch, report_timing
-from OwO.session import SessionManager
-from OwO.stt import STTFactory
-from OwO.util import connected
-from OwO.util.log import LOG
+from owo.client.speech.hotword_factory import HotWordFactory
+from owo.client.speech.mic import MutableMicrophone, ResponsiveRecognizer
+from owo.configuration import Configuration
+from owo.metrics import MetricsAggregator, Stopwatch, report_timing
+from owo.session import SessionManager
+from owo.stt import STTFactory
+from owo.util import connected
+from owo.util.log import LOG
 from queue import Queue, Empty
 
 
@@ -116,7 +116,7 @@ class AudioConsumer(Thread):
             SessionManager.touch()
             self.state.sleeping = False
             self.emitter.emit('recognizer_loop:awoken')
-            self.metrics.increment("OwO.wakeup")
+            self.metrics.increment("owo.wakeup")
 
     @staticmethod
     def _audio_length(audio):
@@ -170,7 +170,7 @@ class AudioConsumer(Thread):
             self.emitter.emit("recognizer_loop:no_internet")
         except HTTPError as e:
             if e.response.status_code == 401:
-                LOG.warning("Access Denied at OwO.ai")
+                LOG.warning("Access Denied at owo.ai")
                 return "pair my device"  # phrase to start the pairing process
             else:
                 LOG.error(e.__class__.__name__ + ': ' + str(e))

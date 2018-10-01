@@ -25,11 +25,11 @@ from threading import Thread, Event
 
 from msm import OwOSkillsManager, SkillRepo, MsmException
 from OwO import dialog
-from OwO.enclosure.api import EnclosureAPI
-from OwO.configuration import Configuration
-from OwO.messagebus.message import Message
-from OwO.util import connected
-from OwO.util.log import LOG
+from owo.enclosure.api import EnclosureAPI
+from owo.configuration import Configuration
+from owo.messagebus.message import Message
+from owo.util import connected
+from owo.util.log import LOG
 
 from .core import load_skill, create_skill_descriptor, MainModule
 
@@ -99,7 +99,7 @@ class SkillManager(Thread):
         bus.on('skill.converse.request', self.handle_converse_request)
 
         # Update on initial connection
-        bus.on('OwO.internet.connected',
+        bus.on('owo.internet.connected',
                lambda x: self._connected_event.set())
 
         # Update upon request
@@ -308,7 +308,7 @@ class SkillManager(Thread):
                            "won't be cleaned from memory.")
                     LOG.warning(msg.format(skill['instance'].name, refs))
             del skill["instance"]
-            self.bus.emit(Message("OwO.skills.shutdown",
+            self.bus.emit(Message("owo.skills.shutdown",
                                   {"path": skill_path,
                                    "id": skill["id"]}))
 
@@ -320,14 +320,14 @@ class SkillManager(Thread):
 
         skill["last_modified"] = modified
         if skill['instance'] is not None:
-            self.bus.emit(Message('OwO.skills.loaded',
+            self.bus.emit(Message('owo.skills.loaded',
                                   {'path': skill_path,
                                    'id': skill['id'],
                                    'name': skill['instance'].name,
                                    'modified': modified}))
             return True
         else:
-            self.bus.emit(Message('OwO.skills.loading_failure',
+            self.bus.emit(Message('owo.skills.loading_failure',
                                   {'path': skill_path,
                                    'id': skill['id']}))
         return False
@@ -379,7 +379,7 @@ class SkillManager(Thread):
                 )
             if not has_loaded and not still_loading and len(skill_paths) > 0:
                 has_loaded = True
-                self.bus.emit(Message('OwO.skills.initialized'))
+                self.bus.emit(Message('owo.skills.initialized'))
 
             self._unload_removed(skill_paths)
             # Pause briefly before beginning next scan
@@ -398,7 +398,7 @@ class SkillManager(Thread):
                     'active': is_active,
                     'id': self.loaded_skills[s]['id']
                 }
-            self.bus.emit(Message('OwO.skills.list', data=info))
+            self.bus.emit(Message('owo.skills.list', data=info))
         except Exception as e:
             LOG.exception(e)
 

@@ -251,8 +251,8 @@ else
 fi
 
 # set permissions for common scripts
-chmod +x start-OwO.sh
-chmod +x stop-OwO.sh
+chmod +x start-owo.sh
+chmod +x stop-owo.sh
 chmod +x bin/OwO-cli-client
 chmod +x bin/OwO-help
 chmod +x bin/OwO-mic-test

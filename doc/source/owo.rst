@@ -2,38 +2,38 @@ OwO package
 ===============
 
 .. toctree::
-    OwO.util
+    owo.util
 
 OwOSkill class
 ------------------
 
-.. autoclass:: OwO.OwOSkill
+.. autoclass:: owo.OwOSkill
     :members:
 
 FallbackSkill class
 -------------------
-.. autoclass:: OwO.FallbackSkill
+.. autoclass:: owo.FallbackSkill
     :show-inheritance:
     :members:
 
 Api class
 ---------
-.. autoclass:: OwO.Api
+.. autoclass:: owo.Api
     :members:
 
 intent_handler decorator
 ------------------------
-.. autofunction:: OwO.intent_handler
+.. autofunction:: owo.intent_handler
 
 intent_file_handler decorator
 -----------------------------
-.. autofunction:: OwO.intent_file_handler
+.. autofunction:: owo.intent_file_handler
 
 adds_context decorator
 ----------------------
-.. autofunction:: OwO.adds_context
+.. autofunction:: owo.adds_context
 
 removes_context decorator
 -------------------------
-.. autofunction:: OwO.removes_context
+.. autofunction:: owo.removes_context
 

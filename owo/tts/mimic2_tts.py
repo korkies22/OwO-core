@@ -13,11 +13,11 @@
 # limitations under the License.
 #
 
-from OwO.tts import TTS, TTSValidator
-from OwO.tts.remote_tts import RemoteTTS
-from OwO.util.log import LOG
-from OwO.util.format import pronounce_number
-from OwO.util import play_wav, get_cache_directory, create_signal
+from owo.tts import TTS, TTSValidator
+from owo.tts.remote_tts import RemoteTTS
+from owo.util.log import LOG
+from owo.util.format import pronounce_number
+from owo.util import play_wav, get_cache_directory, create_signal
 from requests_futures.sessions import FuturesSession
 from urllib import parse
 from .mimic_tts import VISIMES

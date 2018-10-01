@@ -17,13 +17,13 @@ from adapt.context import ContextManagerFrame
 from adapt.engine import IntentDeterminationEngine
 from adapt.intent import IntentBuilder
 
-from OwO.configuration import Configuration
-from OwO.messagebus.message import Message
-from OwO.skills.core import open_intent_envelope
-from OwO.util.log import LOG
-from OwO.util.parse import normalize
-from OwO.metrics import report_timing, Stopwatch
-from OwO.skills.padatious_service import PadatiousService
+from owo.configuration import Configuration
+from owo.messagebus.message import Message
+from owo.skills.core import open_intent_envelope
+from owo.util.log import LOG
+from owo.util.parse import normalize
+from owo.metrics import report_timing, Stopwatch
+from owo.skills.padatious_service import PadatiousService
 
 
 class AdaptIntent(IntentBuilder):
@@ -152,8 +152,8 @@ class IntentService(object):
         self.bus.on('clear_context', self.handle_clear_context)
         # Converse method
         self.bus.on('skill.converse.response', self.handle_converse_response)
-        self.bus.on('OwO.speech.recognition.unknown', self.reset_converse)
-        self.bus.on('OwO.skills.loaded', self.update_skill_name_dict)
+        self.bus.on('owo.speech.recognition.unknown', self.reset_converse)
+        self.bus.on('owo.skills.loaded', self.update_skill_name_dict)
 
         def add_active_skill_handler(message):
             self.add_active_skill(message.data['skill_id'])

@@ -18,9 +18,9 @@ from threading import Thread, Lock
 
 from os.path import isfile, join, expanduser
 
-from OwO.configuration import Configuration
-from OwO.messagebus.message import Message
-from OwO.util.log import LOG
+from owo.configuration import Configuration
+from owo.messagebus.message import Message
+from owo.util.log import LOG
 
 
 def repeat_time(sched_time, repeat):
@@ -47,7 +47,7 @@ class EventScheduler(Thread):
             predetermined time to the registered targets.
 
             Args:
-                bus:            OwO messagebus (OwO.messagebus)
+                bus:            OwO messagebus (owo.messagebus)
                 schedule_file:  File to store pending events to on shutdown
         """
         super(EventScheduler, self).__init__()
@@ -62,13 +62,13 @@ class EventScheduler(Thread):
         if self.schedule_file:
             self.load()
 
-        self.bus.on('OwO.scheduler.schedule_event',
+        self.bus.on('owo.scheduler.schedule_event',
                     self.schedule_event_handler)
-        self.bus.on('OwO.scheduler.remove_event',
+        self.bus.on('owo.scheduler.remove_event',
                     self.remove_event_handler)
-        self.bus.on('OwO.scheduler.update_event',
+        self.bus.on('owo.scheduler.update_event',
                     self.update_event_handler)
-        self.bus.on('OwO.scheduler.get_event',
+        self.bus.on('owo.scheduler.get_event',
                     self.get_event_handler)
         self.start()
 
@@ -206,7 +206,7 @@ class EventScheduler(Thread):
         with self.event_lock:
             if event_name in self.events:
                 event = self.events[event_name]
-        emitter_name = 'OwO.event_status.callback.{}'.format(event_name)
+        emitter_name = 'owo.event_status.callback.{}'.format(event_name)
         self.bus.emit(message.reply(emitter_name, data=event))
 
     def store(self):
@@ -237,9 +237,9 @@ class EventScheduler(Thread):
         """ Stop the running thread. """
         self.isRunning = False
         # Remove listeners
-        self.bus.remove_all_listeners('OwO.scheduler.schedule_event')
-        self.bus.remove_all_listeners('OwO.scheduler.remove_event')
-        self.bus.remove_all_listeners('OwO.scheduler.update_event')
+        self.bus.remove_all_listeners('owo.scheduler.schedule_event')
+        self.bus.remove_all_listeners('owo.scheduler.remove_event')
+        self.bus.remove_all_listeners('owo.scheduler.update_event')
         # Wait for thread to finish
         self.join()
         # Prune event list in preparation for saving

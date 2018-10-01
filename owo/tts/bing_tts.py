@@ -13,8 +13,8 @@
 # limitations under the License.
 #
 
-from OwO.tts import TTS, TTSValidator
-from OwO.configuration import Configuration
+from owo.tts import TTS, TTSValidator
+from owo.configuration import Configuration
 
 
 class BingTTS(TTS):

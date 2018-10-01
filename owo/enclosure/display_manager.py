@@ -37,9 +37,9 @@ from threading import Thread, Timer
 
 import os
 
-from OwO.messagebus.client.ws import WebsocketClient
-from OwO.util import get_ipc_directory
-from OwO.util.log import LOG
+from owo.messagebus.client.ws import WebsocketClient
+from owo.util import get_ipc_directory
+from owo.util.log import LOG
 
 
 def _write_data(dictionary):

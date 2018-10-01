@@ -14,7 +14,7 @@
 #
 import sys
 
-from OwO.client.enclosure import Enclosure
+from owo.client.enclosure import Enclosure
 
 
 def main():

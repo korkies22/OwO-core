@@ -13,9 +13,9 @@
 # limitations under the License.
 #
 
-from OwO.tts import TTSValidator
-from OwO.tts.remote_tts import RemoteTTS
-from OwO.configuration import Configuration
+from owo.tts import TTSValidator
+from owo.tts.remote_tts import RemoteTTS
+from owo.configuration import Configuration
 from requests.auth import HTTPBasicAuth
 
 

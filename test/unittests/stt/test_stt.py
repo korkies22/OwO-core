@@ -16,8 +16,8 @@ import unittest
 
 import mock
 
-import OwO.stt
-from OwO.configuration import Configuration
+import owo.stt
+from owo.configuration import Configuration
 
 from test.util import base_config
 
@@ -25,7 +25,7 @@ from test.util import base_config
 class TestSTT(unittest.TestCase):
     @mock.patch.object(Configuration, 'get')
     def test_factory(self, mock_get):
-        OwO.stt.STTApi = mock.MagicMock()
+        owo.stt.STTApi = mock.MagicMock()
         config = base_config()
         config.merge(
             {
@@ -49,32 +49,32 @@ class TestSTT(unittest.TestCase):
             })
         mock_get.return_value = config
 
-        stt = OwO.stt.STTFactory.create()
-        self.assertEquals(type(stt), OwO.stt.OwOSTT)
+        stt = owo.stt.STTFactory.create()
+        self.assertEquals(type(stt), owo.stt.OwOSTT)
 
         config['stt']['module'] = 'google'
-        stt = OwO.stt.STTFactory.create()
-        self.assertEquals(type(stt), OwO.stt.GoogleSTT)
+        stt = owo.stt.STTFactory.create()
+        self.assertEquals(type(stt), owo.stt.GoogleSTT)
 
         config['stt']['module'] = 'google_cloud'
-        stt = OwO.stt.STTFactory.create()
-        self.assertEquals(type(stt), OwO.stt.GoogleCloudSTT)
+        stt = owo.stt.STTFactory.create()
+        self.assertEquals(type(stt), owo.stt.GoogleCloudSTT)
 
         config['stt']['module'] = 'ibm'
-        stt = OwO.stt.STTFactory.create()
-        self.assertEquals(type(stt), OwO.stt.IBMSTT)
+        stt = owo.stt.STTFactory.create()
+        self.assertEquals(type(stt), owo.stt.IBMSTT)
 
         config['stt']['module'] = 'kaldi'
-        stt = OwO.stt.STTFactory.create()
-        self.assertEquals(type(stt), OwO.stt.KaldiSTT)
+        stt = owo.stt.STTFactory.create()
+        self.assertEquals(type(stt), owo.stt.KaldiSTT)
 
         config['stt']['module'] = 'wit'
-        stt = OwO.stt.STTFactory.create()
-        self.assertEquals(type(stt), OwO.stt.WITSTT)
+        stt = owo.stt.STTFactory.create()
+        self.assertEquals(type(stt), owo.stt.WITSTT)
 
     @mock.patch.object(Configuration, 'get')
     def test_stt(self, mock_get):
-        OwO.stt.STTApi = mock.MagicMock()
+        owo.stt.STTApi = mock.MagicMock()
         config = base_config()
         config.merge(
             {
@@ -86,7 +86,7 @@ class TestSTT(unittest.TestCase):
             })
         mock_get.return_value = config
 
-        class TestSTT(OwO.stt.STT):
+        class TestSTT(owo.stt.STT):
             def execute(self, audio, language=None):
                 pass
 
@@ -105,7 +105,7 @@ class TestSTT(unittest.TestCase):
 
     @mock.patch.object(Configuration, 'get')
     def test_OwO_stt(self, mock_get):
-        OwO.stt.STTApi = mock.MagicMock()
+        owo.stt.STTApi = mock.MagicMock()
         config = base_config()
         config.merge(
             {
@@ -117,14 +117,14 @@ class TestSTT(unittest.TestCase):
             })
         mock_get.return_value = config
 
-        stt = OwO.stt.OwOSTT()
+        stt = owo.stt.OwOSTT()
         audio = mock.MagicMock()
         stt.execute(audio, 'en-us')
-        self.assertTrue(OwO.stt.STTApi.called)
+        self.assertTrue(owo.stt.STTApi.called)
 
     @mock.patch.object(Configuration, 'get')
     def test_google_stt(self, mock_get):
-        OwO.stt.Recognizer = mock.MagicMock
+        owo.stt.Recognizer = mock.MagicMock
         config = base_config()
         config.merge(
             {
@@ -137,13 +137,13 @@ class TestSTT(unittest.TestCase):
         mock_get.return_value = config
 
         audio = mock.MagicMock()
-        stt = OwO.stt.GoogleSTT()
+        stt = owo.stt.GoogleSTT()
         stt.execute(audio)
         self.assertTrue(stt.recognizer.recognize_google.called)
 
     @mock.patch.object(Configuration, 'get')
     def test_google_cloud_stt(self, mock_get):
-        OwO.stt.Recognizer = mock.MagicMock
+        owo.stt.Recognizer = mock.MagicMock
         config = base_config()
         config.merge(
             {
@@ -160,13 +160,13 @@ class TestSTT(unittest.TestCase):
         mock_get.return_value = config
 
         audio = mock.MagicMock()
-        stt = OwO.stt.GoogleCloudSTT()
+        stt = owo.stt.GoogleCloudSTT()
         stt.execute(audio)
         self.assertTrue(stt.recognizer.recognize_google_cloud.called)
 
     @mock.patch.object(Configuration, 'get')
     def test_ibm_stt(self, mock_get):
-        OwO.stt.Recognizer = mock.MagicMock
+        owo.stt.Recognizer = mock.MagicMock
         config = base_config()
         config.merge(
             {
@@ -181,13 +181,13 @@ class TestSTT(unittest.TestCase):
         mock_get.return_value = config
 
         audio = mock.MagicMock()
-        stt = OwO.stt.IBMSTT()
+        stt = owo.stt.IBMSTT()
         stt.execute(audio)
         self.assertTrue(stt.recognizer.recognize_ibm.called)
 
     @mock.patch.object(Configuration, 'get')
     def test_wit_stt(self, mock_get):
-        OwO.stt.Recognizer = mock.MagicMock
+        owo.stt.Recognizer = mock.MagicMock
         config = base_config()
         config.merge(
             {
@@ -200,14 +200,14 @@ class TestSTT(unittest.TestCase):
         mock_get.return_value = config
 
         audio = mock.MagicMock()
-        stt = OwO.stt.WITSTT()
+        stt = owo.stt.WITSTT()
         stt.execute(audio)
         self.assertTrue(stt.recognizer.recognize_wit.called)
 
-    @mock.patch('OwO.stt.post')
+    @mock.patch('owo.stt.post')
     @mock.patch.object(Configuration, 'get')
     def test_kaldi_stt(self, mock_get, mock_post):
-        OwO.stt.Recognizer = mock.MagicMock
+        owo.stt.Recognizer = mock.MagicMock
         config = base_config()
         config.merge(
             {
@@ -226,12 +226,12 @@ class TestSTT(unittest.TestCase):
         }
         mock_post.return_value = kaldiResponse
         audio = mock.MagicMock()
-        stt = OwO.stt.KaldiSTT()
+        stt = owo.stt.KaldiSTT()
         self.assertEquals(stt.execute(audio), 'text')
 
     @mock.patch.object(Configuration, 'get')
     def test_bing_stt(self, mock_get):
-        OwO.stt.Recognizer = mock.MagicMock
+        owo.stt.Recognizer = mock.MagicMock
         config = base_config()
         config.merge(
             {
@@ -244,13 +244,13 @@ class TestSTT(unittest.TestCase):
         mock_get.return_value = config
 
         audio = mock.MagicMock()
-        stt = OwO.stt.BingSTT()
+        stt = owo.stt.BingSTT()
         stt.execute(audio)
         self.assertTrue(stt.recognizer.recognize_bing.called)
 
     @mock.patch.object(Configuration, 'get')
     def test_houndify_stt(self, mock_get):
-        OwO.stt.Recognizer = mock.MagicMock
+        owo.stt.Recognizer = mock.MagicMock
         config = base_config()
         config.merge(
             {
@@ -265,6 +265,6 @@ class TestSTT(unittest.TestCase):
         mock_get.return_value = config
 
         audio = mock.MagicMock()
-        stt = OwO.stt.HoundifySTT()
+        stt = owo.stt.HoundifySTT()
         stt.execute(audio)
         self.assertTrue(stt.recognizer.recognize_houndify.called)

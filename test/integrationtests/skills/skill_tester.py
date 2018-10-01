@@ -39,10 +39,10 @@ import re
 import ast
 from os.path import join, isdir, basename
 from pyee import EventEmitter
-from OwO.messagebus.message import Message
-from OwO.skills.core import create_skill_descriptor, load_skill, \
+from owo.messagebus.message import Message
+from owo.skills.core import create_skill_descriptor, load_skill, \
     OwOSkill, FallbackSkill
-from OwO.skills.settings import SkillSettings
+from owo.skills.settings import SkillSettings
 
 MainModule = '__init__'
 
@@ -209,8 +209,8 @@ class MockSkillsLoader(object):
     def __init__(self, skills_root):
         self.skills_root = skills_root
         self.emitter = InterceptEmitter()
-        from OwO.skills.intent_service import IntentService
-        from OwO.skills.padatious_service import PadatiousService
+        from owo.skills.intent_service import IntentService
+        from owo.skills.padatious_service import PadatiousService
         self.ih = IntentService(self.emitter)
         self.ps = PadatiousService(self.emitter, self.ih)
         self.skills = None
@@ -352,7 +352,7 @@ class SkillTest(object):
                     event.data['__type__'] = event.type
 
                 evaluation_rule.evaluate(event.data)
-                if event.type == 'OwO.skill.handler.complete':
+                if event.type == 'owo.skill.handler.complete':
                     break
             except Empty:
                 pass
@@ -364,7 +364,7 @@ class SkillTest(object):
 
         # remove the skill which is not responding
         self.emitter.remove_all_listeners('speak')
-        self.emitter.remove_all_listeners('OwO.skill.handler.complete')
+        self.emitter.remove_all_listeners('owo.skill.handler.complete')
         # Report test result if failed
         if not evaluation_rule.all_succeeded():
             self.failure_msg = str(evaluation_rule.get_failure())

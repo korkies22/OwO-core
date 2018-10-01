@@ -14,7 +14,7 @@
 #
 import unittest
 
-from OwO.client.speech.hotword_factory import HotWordFactory
+from owo.client.speech.hotword_factory import HotWordFactory
 
 
 class PocketSphinxTest(unittest.TestCase):

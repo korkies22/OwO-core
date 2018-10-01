@@ -41,7 +41,7 @@ function help() {
 }
 
 function process-running() {
-    if [[ $( pgrep -f "python3 -m OwO.*${1}" ) ]] ; then
+    if [[ $( pgrep -f "python3 -m owo.*${1}" ) ]] ; then
         return 0
     else
         return 1
@@ -51,7 +51,7 @@ function process-running() {
 function end-process() {
     if process-running $1 ; then
         echo -n "Stopping $1..."
-        pid=$( pgrep -f "python3 -m OwO.*${1}" )
+        pid=$( pgrep -f "python3 -m owo.*${1}" )
         kill -SIGINT ${pid}
 
         # Wait up to 5 seconds (50 * 0.1) for process to stop
@@ -98,8 +98,8 @@ case ${OPT} in
         end-process speech
 
         # determine platform type
-        if [[ -r /etc/OwO/OwO.conf ]] ; then
-            OwO_platform=$( jq -r ".enclosure.platform" < /etc/OwO/OwO.conf )
+        if [[ -r /etc/OwO/owo.conf ]] ; then
+            OwO_platform=$( jq -r ".enclosure.platform" < /etc/OwO/owo.conf )
             if [[ $OwO_platform == "OwO_mark_1" ]] ; then
                 # running on a Mark 1, stop enclosure service
                 end-process enclosure

@@ -14,7 +14,7 @@
 #
 import subprocess
 
-from OwO.tts import TTS, TTSValidator
+from owo.tts import TTS, TTSValidator
 
 
 class SpdSay(TTS):

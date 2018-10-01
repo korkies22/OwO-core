@@ -19,9 +19,9 @@ from os import listdir
 from os.path import abspath, dirname, basename, isdir, join
 from threading import Lock
 
-from OwO.configuration import Configuration
-from OwO.messagebus.message import Message
-from OwO.util.log import LOG
+from owo.configuration import Configuration
+from owo.messagebus.message import Message
+from owo.util.log import LOG
 
 try:
     import pulsectl
@@ -178,14 +178,14 @@ class AudioService(object):
             LOG.info('no default found')
 
         # Setup event handlers
-        self.bus.on('OwO.audio.service.play', self._play)
-        self.bus.on('OwO.audio.service.queue', self._queue)
-        self.bus.on('OwO.audio.service.pause', self._pause)
-        self.bus.on('OwO.audio.service.resume', self._resume)
-        self.bus.on('OwO.audio.service.stop', self._stop)
-        self.bus.on('OwO.audio.service.next', self._next)
-        self.bus.on('OwO.audio.service.prev', self._prev)
-        self.bus.on('OwO.audio.service.track_info', self._track_info)
+        self.bus.on('owo.audio.service.play', self._play)
+        self.bus.on('owo.audio.service.queue', self._queue)
+        self.bus.on('owo.audio.service.pause', self._pause)
+        self.bus.on('owo.audio.service.resume', self._resume)
+        self.bus.on('owo.audio.service.stop', self._stop)
+        self.bus.on('owo.audio.service.next', self._next)
+        self.bus.on('owo.audio.service.prev', self._prev)
+        self.bus.on('owo.audio.service.track_info', self._track_info)
         self.bus.on('recognizer_loop:audio_output_start', self._lower_volume)
         self.bus.on('recognizer_loop:record_begin', self._lower_volume)
         self.bus.on('recognizer_loop:audio_output_end', self._restore_volume)
@@ -196,12 +196,12 @@ class AudioService(object):
             Callback method called from the services to indicate start of
             playback of a track.
         """
-        self.bus.emit(Message('OwO.audio.playing_track',
+        self.bus.emit(Message('owo.audio.playing_track',
                               data={'track': track}))
 
     def _pause(self, message=None):
         """
-            Handler for OwO.audio.service.pause. Pauses the current audio
+            Handler for owo.audio.service.pause. Pauses the current audio
             service.
 
             Args:
@@ -212,7 +212,7 @@ class AudioService(object):
 
     def _resume(self, message=None):
         """
-            Handler for OwO.audio.service.resume.
+            Handler for owo.audio.service.resume.
 
             Args:
                 message: message bus message, not used but required
@@ -222,7 +222,7 @@ class AudioService(object):
 
     def _next(self, message=None):
         """
-            Handler for OwO.audio.service.next. Skips current track and
+            Handler for owo.audio.service.next. Skips current track and
             starts playing the next.
 
             Args:
@@ -233,7 +233,7 @@ class AudioService(object):
 
     def _prev(self, message=None):
         """
-            Handler for OwO.audio.service.prev. Starts playing the previous
+            Handler for owo.audio.service.prev. Starts playing the previous
             track.
 
             Args:
@@ -244,7 +244,7 @@ class AudioService(object):
 
     def _stop(self, message=None):
         """
-            Handler for OwO.stop. Stops any playing service.
+            Handler for owo.stop. Stops any playing service.
 
             Args:
                 message: message bus message, not used but required
@@ -254,7 +254,7 @@ class AudioService(object):
             if self.current:
                 name = self.current.name
                 if self.current.stop():
-                    self.bus.emit(Message("OwO.stop.handled",
+                    self.bus.emit(Message("owo.stop.handled",
                                           {"by": "audio:" + name}))
 
                 self.current = None
@@ -355,17 +355,17 @@ class AudioService(object):
             selected_service = prefered_service
         # check if default supports the uri
         elif self.default and uri_type in self.default.supported_uris():
-            LOG.debug("Using default backend ({})".format(self.default.name))
+            LOG.debug("Usando backend por defecto({})".format(self.default.name))
             selected_service = self.default
         else:  # Check if any other service can play the media
-            LOG.debug("Searching the services")
+            LOG.debug("Buscando los servicios")
             for s in self.service:
                 if uri_type in s.supported_uris():
-                    LOG.debug("Service {} supports URI {}".format(s, uri_type))
+                    LOG.debug("El servicio {} soporta la URI {}".format(s, uri_type))
                     selected_service = s
                     break
             else:
-                LOG.info('No service found for uri_type: ' + uri_type)
+                LOG.info('No se encuentran servicios para uri_type: ' + uri_type)
                 return
         if not selected_service.supports_mime_hints:
             tracks = [t[0] if isinstance(t, list) else t for t in tracks]
@@ -383,7 +383,7 @@ class AudioService(object):
 
     def _play(self, message):
         """
-            Handler for OwO.audio.service.play. Starts playback of a
+            Handler for owo.audio.service.play. Starts playback of a
             tracklist. Also  determines if the user requested a special
             service.
 
@@ -414,7 +414,7 @@ class AudioService(object):
             track_info = self.current.track_info()
         else:
             track_info = {}
-        self.bus.emit(Message('OwO.audio.service.track_info_reply',
+        self.bus.emit(Message('owo.audio.service.track_info_reply',
                               data=track_info))
 
     def setup_pulseaudio_handlers(self, pulse_choice=None):
@@ -426,7 +426,7 @@ class AudioService(object):
                 pulse_choice: method selection, can be eithe 'mute' or 'lower'
         """
         if pulsectl and pulse_choice:
-            self.pulse = pulsectl.Pulse('OwO-audio-service')
+            self.pulse = pulsectl.Pulse('owo-audio-service')
             if pulse_choice == 'mute':
                 self.pulse_quiet = self.pulse_mute
                 self.pulse_restore = self.pulse_unmute
@@ -443,18 +443,18 @@ class AudioService(object):
                 LOG.error('shutdown of ' + s.name + ' failed: ' + repr(e))
 
         # remove listeners
-        self.bus.remove('OwO.audio.service.play', self._play)
-        self.bus.remove('OwO.audio.service.queue', self._queue)
-        self.bus.remove('OwO.audio.service.pause', self._pause)
-        self.bus.remove('OwO.audio.service.resume', self._resume)
-        self.bus.remove('OwO.audio.service.stop', self._stop)
-        self.bus.remove('OwO.audio.service.next', self._next)
-        self.bus.remove('OwO.audio.service.prev', self._prev)
-        self.bus.remove('OwO.audio.service.track_info', self._track_info)
+        self.bus.remove('owo.audio.service.play', self._play)
+        self.bus.remove('owo.audio.service.queue', self._queue)
+        self.bus.remove('owo.audio.service.pause', self._pause)
+        self.bus.remove('owo.audio.service.resume', self._resume)
+        self.bus.remove('owo.audio.service.stop', self._stop)
+        self.bus.remove('owo.audio.service.next', self._next)
+        self.bus.remove('owo.audio.service.prev', self._prev)
+        self.bus.remove('owo.audio.service.track_info', self._track_info)
         self.bus.remove('recognizer_loop:audio_output_start',
                         self._lower_volume)
         self.bus.remove('recognizer_loop:record_begin', self._lower_volume)
         self.bus.remove('recognizer_loop:audio_output_end',
                         self._restore_volume)
         self.bus.remove('recognizer_loop:record_end', self._restore_volume)
-        self.bus.remove('OwO.stop', self._stop)
+        self.bus.remove('owo.stop', self._stop)

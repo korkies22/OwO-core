@@ -16,7 +16,7 @@ import unittest
 
 from os.path import dirname, join, abspath
 
-import OwO.audio.audioservice as audio_service
+import owo.audio.audioservice as audio_service
 
 """
     Tests for service loader

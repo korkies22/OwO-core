@@ -16,7 +16,7 @@ import sys
 import io
 from math import ceil
 
-from OwO.tts import TTS
+from owo.tts import TTS
 
 import os
 import os.path
@@ -24,11 +24,11 @@ import time
 import curses
 import textwrap
 import json
-import OwO.version
+import owo.version
 from threading import Thread, Lock
-from OwO.messagebus.client.ws import WebsocketClient
-from OwO.messagebus.message import Message
-from OwO.util.log import LOG
+from owo.messagebus.client.ws import WebsocketClient
+from owo.messagebus.message import Message
+from owo.util.log import LOG
 
 import locale
 # Curses uses LC_ALL to determine how to display chars set it to system
@@ -580,7 +580,7 @@ def do_draw_main(scr):
         scr.addstr(0, 0, "Log Output:" + " " * (curses.COLS - 31) +
                    str(start) + "-" + str(end) + " of " + str(cLogs),
                    CLR_HEADING)
-    ver = " OwO-core " + OwO.version.CORE_VERSION_STR + " ==="
+    ver = " OwO-core " + owo.version.CORE_VERSION_STR + " ==="
     scr.addstr(1, 0, "=" * (curses.COLS-1-len(ver)), CLR_HEADING)
     scr.addstr(1, curses.COLS-1-len(ver), ver, CLR_HEADING)
 
@@ -1000,7 +1000,7 @@ def handle_cmd(cmd):
     elif "skills" in cmd:
         # List loaded skill
         message = bus.wait_for_response(
-            Message('skillmanager.list'), reply_type='OwO.skills.list')
+            Message('skillmanager.list'), reply_type='owo.skills.list')
 
         if message:
             show_skills(message.data)

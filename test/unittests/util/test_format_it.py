@@ -18,9 +18,9 @@
 import unittest
 import datetime
 
-from OwO.util.format import nice_number
-from OwO.util.format import nice_time
-from OwO.util.format import pronounce_number
+from owo.util.format import nice_number
+from owo.util.format import nice_time
+from owo.util.format import pronounce_number
 
 NUMBERS_FIXTURE_IT = {
     1.435634: '1.436',

@@ -19,8 +19,8 @@ import traceback
 import tornado.websocket
 from pyee import EventEmitter
 
-from OwO.messagebus.message import Message
-from OwO.util.log import LOG
+from owo.messagebus.message import Message
+from owo.util.log import LOG
 
 
 EventBusEmitter = EventEmitter()

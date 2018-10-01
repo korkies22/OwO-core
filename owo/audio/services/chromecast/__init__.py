@@ -17,9 +17,9 @@ from mimetypes import guess_type
 
 import pychromecast
 
-from OwO.audio.services import AudioBackend
-from OwO.messagebus.message import Message
-from OwO.util.log import LOG
+from owo.audio.services import AudioBackend
+from owo.messagebus.message import Message
+from owo.util.log import LOG
 
 
 class ChromecastService(AudioBackend):

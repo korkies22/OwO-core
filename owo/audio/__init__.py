@@ -14,36 +14,34 @@
 #
 import time
 
-from OwO.util.signal import check_for_signal, create_signal
-
+from owo.util.signal import check_for_signal, create_signal
 
 def is_speaking():
-    """Determine if Text to Speech is occurring
+    """Determina si el TTS funciona.
 
-    Returns:
-        bool: True while still speaking
-    """
+    Retorna:
+        bool: True mientras siga hablando
+            """
     return check_for_signal("isSpeaking", -1)
 
 
 def wait_while_speaking():
-    """Pause as long as Text to Speech is still happening
-
-    Pause while Text to Speech is still happening.  This always pauses
-    briefly to ensure that any preceeding request to speak has time to
-    begin.
-    """
-    time.sleep(0.3)  # Wait briefly in for any queued speech to begin
+    """Pause as long as Text to Speech is still happening"""
+    time.sleep(0.3)
+    "Wait briefly in for any queued speech to begin"
     while is_speaking():
         time.sleep(0.1)
 
 
 def stop_speaking():
-    # TODO: Less hacky approach to this once Audio Manager is implemented
+    # TODO: una implementaciòn menos "hacky" una vez se implemente un audio manager
+    # TODO: una vez el usuario deje de hablar se debe, por ux, dar a entender que se encuentra procesando su solicitud.
+    # TODO: en moviles hay que crear algun modo de cancelar la solicitud en proceso o reiniciar la grabaciòn.
+
     # Skills should only be able to stop speech they've initiated
-    from OwO.messagebus.send import send
+    from owo.messagebus.send import send
     create_signal('stoppingTTS')
-    send('OwO.audio.speech.stop')
+    send('owo.audio.speech.stop')
 
     # Block until stopped
     while check_for_signal("isSpeaking", -1):

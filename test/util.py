@@ -1,4 +1,4 @@
-from OwO.configuration.config import LocalConf, DEFAULT_CONFIG
+from owo.configuration.config import LocalConf, DEFAULT_CONFIG
 from copy import deepcopy
 
 __config = LocalConf(DEFAULT_CONFIG)

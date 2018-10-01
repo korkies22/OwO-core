@@ -18,8 +18,8 @@ from datetime import datetime
 
 from dateutil.relativedelta import relativedelta
 
-from OwO.util.lang.parse_common import is_numeric, look_for_fractions
-from OwO.util.lang.format_en import NUM_STRING_EN, LONG_SCALE_EN, \
+from owo.util.lang.parse_common import is_numeric, look_for_fractions
+from owo.util.lang.format_en import NUM_STRING_EN, LONG_SCALE_EN, \
     SHORT_SCALE_EN
 
 SHORT_ORDINAL_STRING_EN = {

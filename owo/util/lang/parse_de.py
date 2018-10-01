@@ -16,7 +16,7 @@
 #
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
-from OwO.util.lang.parse_common import is_numeric, look_for_fractions
+from owo.util.lang.parse_common import is_numeric, look_for_fractions
 
 de_numbers = {
     'null': 0,

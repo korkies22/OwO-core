@@ -20,13 +20,13 @@ import datetime
 import ast
 from pathlib import Path
 
-from OwO.util.format import nice_number
-from OwO.util.format import nice_time
-from OwO.util.format import nice_date
-from OwO.util.format import nice_date_time
-from OwO.util.format import nice_year
-from OwO.util.format import pronounce_number
-from OwO.util.format import date_time_format
+from owo.util.format import nice_number
+from owo.util.format import nice_time
+from owo.util.format import nice_date
+from owo.util.format import nice_date_time
+from owo.util.format import nice_year
+from owo.util.format import pronounce_number
+from owo.util.format import date_time_format
 
 NUMBERS_FIXTURE_EN = {
     1.435634: '1.436',

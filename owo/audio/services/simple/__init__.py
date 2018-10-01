@@ -15,10 +15,10 @@
 import subprocess
 from time import sleep
 
-from OwO.audio.services import AudioBackend
-from OwO.messagebus.message import Message
-from OwO.util.log import LOG
-from OwO.util import play_mp3, play_ogg, play_wav
+from owo.audio.services import AudioBackend
+from owo.messagebus.message import Message
+from owo.util.log import LOG
+from owo.util import play_mp3, play_ogg, play_wav
 import mimetypes
 from requests import Session
 

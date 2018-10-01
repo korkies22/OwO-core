@@ -21,18 +21,18 @@ DIR="$( pwd )"
 restart=0
 
 # Stopping any active OwO voice service...
-"$DIR/../stop-OwO.sh" audio
+"$DIR/../stop-owo.sh" audio
 if [ $? -ge 100 ] ; then
     restart=1
 fi
-"$DIR/../stop-OwO.sh" voice
+"$DIR/../stop-owo.sh" voice
 if [ $? -ge 100 ] ; then
     restart=1
 fi
 
 
 # Launch the standard audiotest
-"$DIR/../start-OwO.sh" audiotest
+"$DIR/../start-owo.sh" audiotest
 # Necessary for now, audiotest returns while still playing in background
 # TODO: Remove once audiotest has been corrected to wait on playback
 sleep 10
@@ -41,6 +41,6 @@ sleep 10
 if [ $restart -eq 1 ]
 then
     echo "Restarting OwO voice service..."
-    "$DIR/../start-OwO.sh" audio
-    "$DIR/../start-OwO.sh" voice
+    "$DIR/../start-owo.sh" audio
+    "$DIR/../start-owo.sh" voice
 fi

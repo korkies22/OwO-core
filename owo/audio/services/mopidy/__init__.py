@@ -17,9 +17,9 @@ import time
 
 from os.path import dirname, abspath
 
-from OwO.audio.services import AudioBackend
-from OwO.messagebus.message import Message
-from OwO.util.log import LOG
+from owo.audio.services import AudioBackend
+from owo.messagebus.message import Message
+from owo.util.log import LOG
 
 
 sys.path.append(abspath(dirname(__file__)))

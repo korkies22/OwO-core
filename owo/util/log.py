@@ -18,7 +18,7 @@ import sys
 
 from os.path import isfile
 
-from OwO.util.json_helper import load_commented_json
+from owo.util.json_helper import load_commented_json
 
 
 def getLogger(name="OwO"):
@@ -61,7 +61,7 @@ class LOG:
 
     @classmethod
     def init(cls):
-        sys_config = '/etc/OwO/OwO.conf'
+        sys_config = '/etc/OwO/owo.conf'
         config = load_commented_json(sys_config) if isfile(sys_config) else {}
         cls.level = logging.getLevelName(config.get('log_level', 'DEBUG'))
         fmt = '%(asctime)s.%(msecs)03d - ' \

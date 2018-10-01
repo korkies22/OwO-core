@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-from OwO.audio.services import AudioBackend
-from OwO.util.log import LOG
+from owo.audio.services import AudioBackend
+from owo.util.log import LOG
 try:
     from py_mplayer import MplayerCtrl
 except ImportError:

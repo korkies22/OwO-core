@@ -22,4 +22,4 @@ DIR="$( pwd )"
 source "$DIR/../venv-activate.sh" -q
 
 # Send a message to be spoken
-output=$(python -m OwO.messagebus.send "speak"  "{\"utterance\": \"$@\"}")
+output=$(python -m owo.messagebus.send "speak"  "{\"utterance\": \"$@\"}")
