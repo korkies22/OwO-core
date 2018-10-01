@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Copyright 2017 OwO AI Inc.
+# Copyright 2017 ow AI Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -45,7 +45,7 @@ cd $(dirname $0)
 TOP=$( pwd -L )
 
 function show_help() {
-    echo "dev_setup.sh: OwO development environment setup"
+    echo "dev_setup.sh: owo development environment setup"
     echo "Usage: dev_setup.sh [options]"
     echo
     echo "Options:"
@@ -53,7 +53,7 @@ function show_help() {
     echo "    -fm               Force mimic build"
     echo "    -h, --help        Show this message"
     echo
-    echo "This will prepare your environment for running the OwO-core"
+    echo "This will prepare your environment for running the owo-core"
     echo "services. Normally this should be run as a normal user,"
     echo "not as root/sudo."
 }
@@ -88,7 +88,7 @@ fi
     #  * Run on 'master' or on 'dev'?  Most users probably want 'master'
     #  * Auto-update?  When on, it will pull and run dev_setup automatically
     #  * Pull down mimic source?  Most will be happy with just the package
-    #  * Add OwO-core/bin to the .bashrc PATH?
+    #  * Add owo-core/bin to the .bashrc PATH?
 
     # from Picroft's wizard:
     #   echo '{"use_branch":"master", "auto_update": true}' > .dev_opts.json
@@ -189,7 +189,7 @@ easy_install pip==18.0
 
 PYTHON=$( python -c "import sys;print('python{}.{}'.format(sys.version_info[0], sys.version_info[1]))" )
 
-# Add OwO-core to the virtualenv path
+# Add owo-core to the virtualenv path
 # (This is equivalent to typing 'add2virtualenv $TOP', except
 # you can't invoke that shell function from inside a script)
 VENV_PATH_FILE="${VIRTUALENV_ROOT}/lib/$PYTHON/site-packages/_virtualenv_path_extensions.pth"
@@ -199,7 +199,7 @@ if [ ! -f "$VENV_PATH_FILE" ] ; then
 fi
 
 if ! grep -q "$TOP" $VENV_PATH_FILE ; then
-    echo "Adding OwO-core to virtualenv path"
+    echo "Adding owo-core to virtualenv path"
     sed -i.tmp '1 a\
 '"$TOP"'
 ' "${VENV_PATH_FILE}"
@@ -253,24 +253,24 @@ fi
 # set permissions for common scripts
 chmod +x start-owo.sh
 chmod +x stop-owo.sh
-chmod +x bin/OwO-cli-client
-chmod +x bin/OwO-help
-chmod +x bin/OwO-mic-test
-chmod +x bin/OwO-msk
-chmod +x bin/OwO-msm
-chmod +x bin/OwO-pip
-chmod +x bin/OwO-say-to
-chmod +x bin/OwO-skill-testrunner
-chmod +x bin/OwO-speak
+chmod +x bin/owo-cli-client
+chmod +x bin/owo-help
+chmod +x bin/owo-mic-test
+chmod +x bin/owo-msk
+chmod +x bin/owo-msm
+chmod +x bin/owo-pip
+chmod +x bin/owo-say-to
+chmod +x bin/owo-skill-testrunner
+chmod +x bin/owo-speak
 
 # create and set permissions for logging
-if [[ ! -w /var/log/OwO/ ]] ; then
+if [[ ! -w /var/log/owo/ ]] ; then
     # Creating and setting permissions
-    echo "Creating /var/log/OwO/ directory"
-    if [[ ! -d /var/log/OwO/ ]] ; then
-        sudo mkdir /var/log/OwO/
+    echo "Creating /var/log/owo/ directory"
+    if [[ ! -d /var/log/owo/ ]] ; then
+        sudo mkdir /var/log/owo/
     fi
-    sudo chmod 777 /var/log/OwO/
+    sudo chmod 777 /var/log/owo/
 fi
 
 #Store a fingerprint of setup
